@@ -1,0 +1,1947 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAKI NISHIOKA — Pianist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap" rel="stylesheet" />
+  <style>/* ===================================================
+   SAKI NISHIOKA — Pianist
+   Monochrome Luxury Design System
+   =================================================== */
+
+:root {
+  --black:   #0a0a0a;
+  --deep:    #111111;
+  --dark:    #1a1a1a;
+  --mid:     #2a2a2a;
+  --border:  #333333;
+  --muted:   #555555;
+  --silver:  #888888;
+  --light:   #cccccc;
+  --white:   #f5f5f0;
+  --accent:  #d4c4a0;
+
+  --font-display: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', sans-serif;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --section-pad: clamp(80px, 12vw, 160px);
+  --container: 1200px;
+}
+
+/* ===================================================
+   RESET & BASE
+   =================================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--black);
+  color: var(--light);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.8;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--accent); color: var(--black); }
+
+a { color: inherit; text-decoration: none; }
+
+img, svg { display: block; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* ===================================================
+   NAVIGATION
+   =================================================== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(24px, 5vw, 80px);
+  height: 72px;
+  transition: background 0.4s var(--ease-out), border-color 0.4s;
+  border-bottom: 1px solid transparent;
+}
+
+.nav.scrolled {
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(12px);
+  border-color: var(--border);
+}
+
+.nav__logo a {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  color: var(--white);
+  transition: color 0.3s;
+}
+.nav__logo a:hover { color: var(--accent); }
+
+.nav__links {
+  display: flex;
+  gap: clamp(24px, 3vw, 48px);
+  list-style: none;
+}
+
+.nav__links a {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  color: var(--silver);
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav__links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0; right: 100%;
+  height: 1px;
+  background: var(--accent);
+  transition: right 0.3s var(--ease-out);
+}
+.nav__links a:hover { color: var(--white); }
+.nav__links a:hover::after { right: 0; }
+
+.nav__cta {
+  border: 1px solid var(--border) !important;
+  padding: 6px 18px;
+  color: var(--light) !important;
+  transition: border-color 0.3s, background 0.3s !important;
+}
+.nav__cta:hover {
+  background: var(--white) !important;
+  color: var(--black) !important;
+  border-color: var(--white) !important;
+}
+.nav__cta::after { display: none !important; }
+
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.nav__hamburger span {
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--light);
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+.mobile-menu.open { opacity: 1; pointer-events: all; }
+.mobile-menu ul { list-style: none; text-align: center; }
+.mobile-menu ul li { padding: 16px 0; }
+.mobile-menu ul a {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 8vw, 4rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--silver);
+  transition: color 0.3s;
+}
+.mobile-menu ul a:hover { color: var(--white); }
+
+/* ===================================================
+   BUTTONS
+   =================================================== */
+.btn {
+  display: inline-block;
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  padding: 14px 36px;
+  border: 1px solid;
+  transition: all 0.35s var(--ease-out);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-101%);
+  transition: transform 0.35s var(--ease-out);
+}
+
+.btn:hover::before { transform: translateX(0); }
+
+.btn--primary {
+  background: var(--white);
+  color: var(--black);
+  border-color: var(--white);
+}
+.btn--primary::before { background: var(--accent); }
+.btn--primary:hover { color: var(--black); }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--silver);
+  border-color: var(--border);
+}
+.btn--ghost::before { background: var(--mid); }
+.btn--ghost:hover { color: var(--light); border-color: var(--muted); }
+
+.btn--outline {
+  background: transparent;
+  color: var(--light);
+  border-color: var(--border);
+}
+.btn--outline::before { background: var(--white); }
+.btn--outline:hover { color: var(--black); border-color: var(--white); }
+
+/* ===================================================
+   SECTION COMMONS
+   =================================================== */
+.section {
+  padding: var(--section-pad) clamp(24px, 7vw, 100px);
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.section__label {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.section__label::after {
+  content: '';
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: var(--border);
+}
+
+.section__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--white);
+  margin-bottom: 60px;
+}
+.section__title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+/* ===================================================
+   HERO
+   =================================================== */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 0 clamp(24px, 7vw, 100px);
+  gap: 60px;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero__noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.4;
+}
+
+.hero__lines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 80px,
+    rgba(255,255,255,0.012) 80px,
+    rgba(255,255,255,0.012) 81px
+  );
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  padding-top: 72px;
+}
+
+.hero__subtitle {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.hero__name {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+}
+
+.hero__name-ja {
+  font-family: var(--font-sans);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  color: var(--white);
+  line-height: 1.3;
+}
+
+.hero__name-en {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--white);
+  line-height: 1;
+  font-style: italic;
+}
+
+.hero__tagline {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-style: italic;
+  color: var(--silver);
+  margin-bottom: 48px;
+  letter-spacing: 0.05em;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hero__image-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 72px;
+}
+
+.hero__image {
+  width: min(100%, 460px);
+  position: relative;
+  z-index: 2;
+}
+
+.hero__image svg {
+  width: 100%;
+  height: auto;
+}
+
+.hero__image-wrap::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  right: -5%;
+  width: 60%;
+  height: 80%;
+  border: 1px solid var(--border);
+  z-index: 1;
+}
+
+.hero__image-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 5%;
+  left: 0%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(ellipse, rgba(212,196,160,0.04), transparent 70%);
+  z-index: 0;
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: 40px;
+  left: clamp(24px, 7vw, 100px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-serif);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+  z-index: 2;
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(var(--border), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { transform: scaleY(1); opacity: 1; }
+  50% { transform: scaleY(0.5); opacity: 0.5; }
+}
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: reveal 0.9s var(--ease-out) forwards;
+}
+
+.reveal:nth-child(1) { animation-delay: 0.2s; }
+.reveal:nth-child(2) { animation-delay: 0.45s; }
+.reveal:nth-child(3) { animation-delay: 0.6s; }
+.reveal:nth-child(4) { animation-delay: 0.75s; }
+
+@keyframes reveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===================================================
+   PROFILE
+   =================================================== */
+.profile { background: var(--deep); }
+
+.profile__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 8vw, 100px);
+  align-items: start;
+  max-width: var(--container);
+  margin: 0 auto;
+}
+
+.profile__body p {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--silver);
+  margin-bottom: 20px;
+  line-height: 1.9;
+}
+
+.profile__awards {
+  margin: 48px 0;
+  border-top: 1px solid var(--border);
+  padding-top: 32px;
+}
+
+.award {
+  display: flex;
+  gap: 24px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: baseline;
+}
+
+.award__year {
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  min-width: 50px;
+}
+
+.award__text {
+  font-size: 0.9rem;
+  color: var(--silver);
+}
+
+.profile__image-wrap {
+  position: relative;
+}
+
+.profile__image {
+  width: 100%;
+}
+
+.profile__image svg {
+  width: 100%;
+  height: auto;
+}
+
+.profile__image-deco {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: 20px;
+  bottom: 20px;
+  border: 1px solid var(--border);
+  z-index: -1;
+}
+
+/* ===================================================
+   SCHEDULE
+   =================================================== */
+.schedule {
+  background: var(--black);
+}
+
+.schedule__list {
+  max-width: var(--container);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.schedule__item {
+  display: grid;
+  grid-template-columns: 140px 1fr auto;
+  gap: 32px;
+  align-items: center;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s;
+  position: relative;
+}
+
+.schedule__item::before {
+  content: '';
+  position: absolute;
+  left: -clamp(24px, 7vw, 100px);
+  right: -clamp(24px, 7vw, 100px);
+  top: 0; bottom: 0;
+  background: var(--deep);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: -1;
+}
+
+.schedule__item:hover::before { opacity: 1; }
+
+.schedule__item--featured .schedule__date .schedule__day {
+  color: var(--accent);
+}
+
+.schedule__date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.schedule__month {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.schedule__day {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1;
+}
+
+.schedule__year {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+.schedule__tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 3px 10px;
+  margin-bottom: 8px;
+}
+
+.schedule__title {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.schedule__title em {
+  font-style: italic;
+  color: var(--silver);
+  font-size: 0.9em;
+}
+
+.schedule__venue {
+  font-size: 0.9rem;
+  color: var(--silver);
+}
+
+.schedule__detail {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.schedule__ticket {
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  white-space: nowrap;
+  transition: color 0.3s;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.schedule__ticket:hover { color: var(--white); border-color: var(--white); }
+
+/* ===================================================
+   DISCOGRAPHY / CD
+   =================================================== */
+.cd { background: var(--deep); }
+
+.cd__grid {
+  max-width: var(--container);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 32px;
+}
+
+.cd__item--featured {
+  grid-row: 1 / 3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+  background: var(--dark);
+  padding: 48px;
+  border: 1px solid var(--border);
+}
+
+.cd__item {
+  background: var(--dark);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+.cd__item:hover { border-color: var(--muted); }
+
+.cd__cover {
+  width: 100%;
+}
+.cd__cover svg { width: 100%; height: auto; }
+
+.cd__cover--sm {
+  aspect-ratio: 1;
+}
+.cd__cover--sm svg { width: 100%; height: 100%; }
+
+.cd__label {
+  display: inline-block;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  background: var(--accent);
+  color: var(--black);
+  padding: 3px 10px;
+  margin-bottom: 16px;
+}
+
+.cd__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.cd__subtitle {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--silver);
+  margin-bottom: 20px;
+}
+
+.cd__desc {
+  font-size: 0.9rem;
+  color: var(--silver);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.cd__tracklist {
+  margin-bottom: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.cd__track {
+  display: flex;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.cd__track span {
+  color: var(--accent);
+  font-family: var(--font-serif);
+  min-width: 20px;
+}
+.cd__track--more { color: var(--border); font-style: italic; }
+
+.cd__title--sm {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--white);
+  padding: 16px 20px 4px;
+}
+
+.cd__year {
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  padding: 0 20px 16px;
+}
+
+/* ===================================================
+   NEWS
+   =================================================== */
+.news { background: var(--black); }
+
+.news__grid {
+  max-width: var(--container);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.news__item {
+  background: var(--black);
+  padding: 40px;
+  transition: background 0.3s;
+}
+.news__item:hover { background: var(--deep); }
+
+.news__item--large {
+  grid-row: 1 / 4;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+}
+
+.news__image {
+  width: 100%;
+  flex-shrink: 0;
+}
+.news__image svg { width: 100%; height: auto; }
+
+.news__item--large .news__body {
+  padding: 40px;
+  flex: 1;
+}
+
+.news__date {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.news__category {
+  display: inline-block;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 2px 10px;
+  margin-bottom: 16px;
+}
+
+.news__title {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.news__excerpt {
+  font-size: 0.88rem;
+  color: var(--silver);
+  line-height: 1.9;
+  margin-bottom: 24px;
+}
+
+.news__more {
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  transition: color 0.3s;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2px;
+  display: inline-block;
+}
+.news__more:hover { color: var(--white); border-color: var(--white); }
+
+/* ===================================================
+   BLOG
+   =================================================== */
+.blog { background: var(--deep); }
+
+.blog__grid {
+  max-width: var(--container);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border);
+  margin-bottom: 48px;
+}
+
+.blog__item {
+  background: var(--deep);
+  transition: background 0.3s;
+  cursor: pointer;
+}
+.blog__item:hover { background: var(--dark); }
+
+.blog__image svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.blog__body {
+  padding: 28px 28px 36px;
+}
+
+.blog__date {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.blog__title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.blog__excerpt {
+  font-size: 0.85rem;
+  color: var(--silver);
+  line-height: 1.8;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog__link {
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  transition: opacity 0.3s;
+}
+.blog__link:hover { opacity: 0.7; }
+
+.blog__more {
+  text-align: center;
+  max-width: var(--container);
+  margin: 0 auto;
+}
+
+/* ===================================================
+   CONTACT
+   =================================================== */
+.contact { background: var(--black); }
+
+.contact__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: clamp(40px, 8vw, 100px);
+  align-items: start;
+}
+
+.contact__desc {
+  font-size: 0.95rem;
+  color: var(--silver);
+  line-height: 1.9;
+  margin-bottom: 48px;
+}
+
+.contact__info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact__info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.contact__info-label {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+}
+
+.contact__info-value {
+  font-size: 0.9rem;
+  color: var(--light);
+}
+
+/* Form */
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form__label {
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  color: var(--silver);
+  text-transform: uppercase;
+}
+.form__label span { color: var(--accent); }
+
+.form__input,
+.form__select,
+.form__textarea {
+  background: var(--deep);
+  border: 1px solid var(--border);
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 300;
+  padding: 14px 20px;
+  transition: border-color 0.3s;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+}
+
+.form__input::placeholder,
+.form__textarea::placeholder { color: var(--muted); }
+.form__input:focus,
+.form__select:focus,
+.form__textarea:focus { border-color: var(--silver); }
+
+.form__select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  cursor: pointer;
+}
+.form__select option { background: var(--dark); }
+
+.form__textarea { resize: vertical; min-height: 140px; line-height: 1.7; }
+
+.form__submit {
+  align-self: flex-start;
+  background: #d4c4a0;
+  font-size: 1.0rem;
+}
+
+.form__notice {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: -8px;
+}
+
+/* ===================================================
+   FOOTER
+   =================================================== */
+.footer {
+  background: var(--deep);
+  border-top: 1px solid var(--border);
+  padding: 80px clamp(24px, 7vw, 100px) 48px;
+}
+
+.footer__top {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 48px;
+  align-items: start;
+  padding-bottom: 60px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+
+.footer__name {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.footer__sub {
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+}
+
+.footer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  justify-content: center;
+}
+
+.footer__nav a {
+  font-family: var(--font-serif);
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  transition: color 0.3s;
+}
+.footer__nav a:hover { color: var(--white); }
+
+.footer__social {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.footer__social a {
+  color: var(--muted);
+  transition: color 0.3s;
+}
+.footer__social a:hover { color: var(--white); }
+
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-family: var(--font-serif);
+  letter-spacing: 0.08em;
+}
+
+/* ===================================================
+   RESPONSIVE
+   =================================================== */
+@media (max-width: 1024px) {
+  .cd__item--featured {
+    grid-template-columns: 1fr;
+  }
+  .news__grid {
+    grid-template-columns: 1fr;
+  }
+  .news__item--large {
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-top: 120px;
+    padding-bottom: 80px;
+    text-align: center;
+  }
+  .hero__image-wrap { order: -1; }
+  .hero__actions { justify-content: center; }
+  .hero__scroll { display: none; }
+
+  .profile__inner,
+  .contact__inner {
+    grid-template-columns: 1fr;
+  }
+  .profile__image-wrap { order: -1; }
+
+  .cd__grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  .cd__item--featured { grid-row: auto; }
+
+  .blog__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__top {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .footer__nav { justify-content: center; }
+  .footer__social { justify-content: center; }
+  .footer__bottom {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .schedule__item {
+    grid-template-columns: 100px 1fr;
+    grid-template-rows: auto auto;
+  }
+  .schedule__ticket {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav__links { display: none; }
+  .nav__hamburger { display: flex; }
+
+  .hero__name-en { font-size: 2.5rem; }
+
+  .schedule__item {
+    grid-template-columns: 80px 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav__logo">
+      <a href="#top">SAKI NISHIOKA</a>
+    </div>
+    <ul class="nav__links">
+      <li><a href="#profile">Profile</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#cd">Discography</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#contact" class="nav__cta">Contact</a></li>
+    </ul>
+    <button class="nav__hamburger" id="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#profile" class="mobile-link">Profile</a></li>
+      <li><a href="#schedule" class="mobile-link">Schedule</a></li>
+      <li><a href="#cd" class="mobile-link">Discography</a></li>
+      <li><a href="#news" class="mobile-link">News</a></li>
+      <li><a href="#blog" class="mobile-link">Blog</a></li>
+      <li><a href="#contact" class="mobile-link">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="hero__bg">
+      <div class="hero__noise"></div>
+      <div class="hero__lines"></div>
+    </div>
+    <div class="hero__image-wrap">
+      <div class="hero__image">
+          <img 
+            src="photo_sakinishioka1.jpg" 
+            alt="西岡沙樹 写真" 
+            style="width: 100%; height: 100%; object-fit: cover; display: block;"
+        />
+        <!-- <svg viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="imgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#1a1a1a"/>
+              <stop offset="100%" style="stop-color:#3a3a3a"/>
+            </linearGradient>
+          </defs>
+          <rect width="500" height="600" fill="url(#imgGrad)"/> -->
+          <!-- Silhouette of pianist -->
+          <!-- <ellipse cx="250" cy="140" rx="70" ry="80" fill="#555"/>
+          <path d="M160 260 Q180 220 250 220 Q320 220 340 260 L360 420 Q310 440 250 440 Q190 440 140 420 Z" fill="#555"/>
+          <rect x="180" y="400" width="30" height="120" rx="5" fill="#555"/>
+          <rect x="290" y="400" width="30" height="120" rx="5" fill="#555"/> -->
+          <!-- Piano keys suggestion -->
+          <!-- <rect x="60" y="460" width="380" height="80" rx="4" fill="#222"/>
+          <rect x="70" y="460" width="28" height="50" rx="2" fill="#f0f0f0"/>
+          <rect x="103" y="460" width="28" height="50" rx="2" fill="#f0f0f0"/>
+          <rect x="136" y="460" width="28" height="50" rx="2" fill="#f0f0f0"/>
+          <rect x="169" y="460" width="28" height="50" rx="2" fill="#f0f0f0"/>
+          <rect x="202" y="460" width="28" height="50" rx="2" fill="#f0f0f0"/>
+          <rect x="235" y="460" width="28" height="50" rx="2" fill="#f0f0f0"/>
+          <rect x="268" y="460" width="28" height="50" rx="2" fill="#f0f0f0"/>
+          <rect x="301" y="460" width="28" height="50" rx="2" fill="#f0f0f0"/>
+          <rect x="334" y="460" width="28" height="50" rx="2" fill="#f0f0f0"/>
+          <rect x="367" y="460" width="28" height="50" rx="2" fill="#f0f0f0"/>
+          <rect x="91" y="460" width="18" height="34" rx="2" fill="#111"/>
+          <rect x="124" y="460" width="18" height="34" rx="2" fill="#111"/>
+          <rect x="179" y="460" width="18" height="34" rx="2" fill="#111"/>
+          <rect x="212" y="460" width="18" height="34" rx="2" fill="#111"/>
+          <rect x="245" y="460" width="18" height="34" rx="2" fill="#111"/>
+          <rect x="311" y="460" width="18" height="34" rx="2" fill="#111"/>
+          <rect x="344" y="460" width="18" height="34" rx="2" fill="#111"/> -->
+          <!-- <text x="250" y="570" text-anchor="middle" fill="#888" font-size="12" font-family="serif" letter-spacing="3">PIANIST</text> -->
+        <!-- </svg> -->
+      </div>
+    </div>
+    <div class="hero__content">
+      <p class="hero__subtitle reveal">— Nara / Paris</p>
+      <h1 class="hero__name reveal">
+        <span class="hero__name-ja">西岡 沙樹</span>
+        <span class="hero__name-en">SAKI NISHIOKA</span>
+      </h1>
+      <p class="hero__tagline reveal">
+        静寂の中に宿る、音の詩情
+      </p>
+      <div class="hero__actions reveal">
+        <a href="#schedule" class="btn btn--primary">次のコンサート</a>
+        <a href="#cd" class="btn btn--ghost">ディスコグラフィー</a>
+      </div>
+    </div>
+    <div class="hero__scroll">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Profile -->
+  <section class="section profile" id="profile">
+    <div class="section__label">01 — Profile</div>
+    <div class="profile__inner">
+      <div class="profile__text">
+        <!-- <h2 class="section__title">音楽と、<br><em>生きる。</em></h2> -->
+        <div class="profile__body">
+          <p>奈良県出身。 
+            <br>四天王寺高等学校を経て、京都市立芸術大学音楽学部器楽科ピアノ専攻卒業後、渡仏。パリ国立高等音楽院ピアノ科修士課程に審査員満場一致の首席で合格し、2018年に最優秀で修了。</p>
+          <p>また京都フランス音楽アカデミーよりスカラシップを得て、奨学生としてパリ・エコール・ノルマル音楽院にも在籍し、コンサーティストディプロム取得。2013・2014年度（公財）青山音楽財団奨学生。 
+            <br>第61回全日本学生音楽コンクール全国大会第2位、第19回フッペル鳥栖ピアノコンクール第1位、第18回松方ホール音楽賞奨励賞、第5回フォーレ国際ピアノコンクール（フランス）第2位・聴衆賞。その他、ピティナピアノコンペティションD・G級全国決勝大会入賞・入選など多数受賞。</p>
+          <p>2019年以降、日本・ヨーロッパ各地でのソロリサイタルや、リベイラン・プレート交響楽団（ブラジル）をはじめ、国内外のオーケストラと共演。フランスにて、パリ・ショパンフェスティバル、リストマニア (Lisztomanias)、ピアノ・オン・ヴァロワ (Piano en Valois)、ジャコバン国際ピアノ音楽祭 (Piano aux Jacobins) 等の音楽祭にも出演しリサイタルを行う。</p>
+          <p>これまでにクラウディオ・ソアレス、阿部裕之、ブルーノ・リグット、オルタンス・カルティエ=ブレッソン、フェルナンド・ロッサーノの各氏に師事。 
+          <p>2022年、NHK-FM「リサイタル・パッシオ」出演。2023年には、あいおいニッセイ同和損保ザ・フェニックスホール（大阪）の「フェニックス・エヴォリューション・シリーズ」に選出され、フォーレのノクターン全13曲及び即興曲全5曲によるリサイタルを開催し好評を博すなど、精力的に演奏活動を行っている。</p>
+            <br>2023年10月から2024年4月にかけて、CD4枚分に及ぶ「フォーレ：ピアノソロ作品全集（編曲版含む）」を10日間でレコーディングし、2025年、2巻に分けてリリース。</p>
+        </div>
+        <div class="profile__awards">
+          <div class="award">
+            <span class="award__year">2013</span>
+            <span class="award__text">第19回フッペル鳥栖ピアノコンクールフッペル部門 第1位</span>
+          </div>
+          <div class="award">
+            <span class="award__year">2014  </span>
+            <span class="award__text">第18回松方ホール音楽賞 奨励賞</span>
+          </div>
+          <div class="award">
+            <span class="award__year">2015</span>
+            <span class="award__text">第89回レオポルト・ベラン国際コンクール 第2位（フランス、パリ）</span>
+          </div>
+          <div class="award">
+            <span class="award__year">2016</span>
+            <span class="award__text">第5回フォーレ国際ピアノコンクール 第2位聴衆賞（フランス、パミエ）</span>
+          </div>
+          <div class="award">
+            <span class="award__year">2018</span>
+            <span class="award__text">第7回バルセロナ国際ピアノアカデミーコンクール 優勝</span>
+          </div>
+        </div>
+        <a href="#contact" class="btn btn--outline">お問い合わせ</a>
+      </div>
+      <div class="profile__image-wrap">
+        <div class="profile__image">
+            <img 
+            src="photo_sakinishioka2.jpg" 
+            alt="西岡沙樹 プロフィール写真" 
+            style="width: 100%; height: 100%; object-fit: cover; display: block;"
+        />
+          <!-- <svg viewBox="0 0 420 560" xmlns="http://www.w3.org/2000/svg"> -->
+            <!-- <rect width="420" height="560" fill="#1c1c1c"/>
+            <ellipse cx="210" cy="160" rx="80" ry="95" fill="#3a3a3a"/>
+            <path d="M100 330 Q130 270 210 270 Q290 270 320 330 L345 480 Q280 510 210 510 Q140 510 75 480 Z" fill="#3a3a3a"/>
+            <line x1="0" y1="0" x2="420" y2="560" stroke="#2a2a2a" stroke-width="1"/>
+            <line x1="420" y1="0" x2="0" y2="560" stroke="#2a2a2a" stroke-width="1"/> -->
+            <!-- <text x="210" y="545" text-anchor="middle" fill="#555" font-size="11" font-family="serif" letter-spacing="4">SAKI NISHIOKA</text>
+          </svg> -->
+        </div>
+        <div class="profile__image-deco"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schedule -->
+  <section class="section schedule" id="schedule">
+    <div class="section__label">02 — Schedule</div>
+    <h2 class="section__title">演奏スケジュール</h2>
+    <div class="schedule__list">
+
+      <article class="schedule__item schedule__item--featured">
+        <div class="schedule__date">
+          <span class="schedule__month">Jun</span>
+          <span class="schedule__day">13</span>
+          <span class="schedule__year">2026</span>
+        </div>
+        <div class="schedule__info">
+          <span class="schedule__tag">RECITAL</span>
+          <h3 class="schedule__title">西岡 沙樹 ピアノ・リサイタル<br><em>— 時の流れが描く、100年の眺め</em></h3>
+          <p class="schedule__venue">奈良女子大学 記念館</p>
+          <p class="schedule__detail">開場 13:30 / 開演 14:00</p>
+        </div>
+        <a href="https://www.naraken.com/musik/2026/event/22054/" class="schedule__ticket">Tickets →</a>
+      </article>
+
+      <article class="schedule__item">
+        <div class="schedule__date">
+          <span class="schedule__month">May</span>
+          <span class="schedule__day">07</span>
+          <span class="schedule__year">2026</span>
+        </div>
+        <div class="schedule__info">
+          <span class="schedule__tag">ORCHESTRA</span>
+          <h3 class="schedule__title">◆ウィーンフィル首席チェロ奏者タマーシュ・ヴァルガ日本ツアー共演</h3>
+          <p class="schedule__venue">東海市芸術劇場, 愛知</p>
+          <p class="schedule__detail">開場 18:30 / 開演 19:00</p>
+        </div>
+        <a href="https://www.tokai-arts.jp/performance/sponsor/perform/31915/" class="schedule__ticket">Tickets →</a>
+      </article>
+
+      <article class="schedule__item">
+        <div class="schedule__date">
+          <span class="schedule__month">May</span>
+          <span class="schedule__day">08</span>
+          <span class="schedule__year">2026</span>
+        </div>
+        <div class="schedule__info">
+          <span class="schedule__tag">ORCHESTRA</span>
+          <h3 class="schedule__title">◆ウィーンフィル首席チェロ奏者タマーシュ・ヴァルガ日本ツアー共演</h3>
+          <p class="schedule__venue">ザ・フェニックスホール, 大阪</p>
+          <p class="schedule__detail">開場 13:30 / 開演 14:00</p>
+        </div>
+        <a href="https://phoenixhall.jp/performance/2026/05/08/25045/" class="schedule__ticket">Tickets →</a>
+      </article>
+            <article class="schedule__item">
+        <div class="schedule__date">
+          <span class="schedule__month">May</span>
+          <span class="schedule__day">09</span>
+          <span class="schedule__year">2026</span>
+        </div>
+        <div class="schedule__info">
+          <span class="schedule__tag">ORCHESTRA</span>
+          <h3 class="schedule__title">◆ウィーンフィル首席チェロ奏者タマーシュ・ヴァルガ日本ツアー共演</h3>
+          <p class="schedule__venue">武蔵野市民文化会館, 東京</p>
+          <p class="schedule__detail">開場 13:30 / 開演 14:00</p>
+        </div>
+        <a href="https://www.musashino.or.jp/bunka/1002092/1008796.html" class="schedule__ticket">Tickets →</a>
+      </article>
+            <article class="schedule__item">
+        <div class="schedule__date">
+          <span class="schedule__month">May</span>
+          <span class="schedule__day">17</span>
+          <span class="schedule__year">2026</span>
+        </div>
+        <div class="schedule__info">
+          <span class="schedule__tag">ORCHESTRA</span>
+          <h3 class="schedule__title">◆ウィーンフィル首席チェロ奏者タマーシュ・ヴァルガ日本ツアー共演</h3>
+          <p class="schedule__venue">森のホール２１　松戸市文化会館, 千葉</p>
+          <p class="schedule__detail">開場 14:30 / 開演 15:00</p>
+        </div>
+        <a href="#" class="schedule__ticket">Tickets →</a>
+      </article>
+            <article class="schedule__item">
+        <div class="schedule__date">
+          <span class="schedule__month">May</span>
+          <span class="schedule__day">18</span>
+          <span class="schedule__year">2026</span>
+        </div>
+        <div class="schedule__info">
+          <span class="schedule__tag">ORCHESTRA</span>
+          <h3 class="schedule__title">◆ウィーンフィル首席チェロ奏者タマーシュ・ヴァルガ日本ツアー共演</h3>
+          <p class="schedule__venue">海老名市文化会館, 神奈川</p>
+          <p class="schedule__detail">開場 13:30 / 開演 14:00</p>
+        </div>
+        <a href="https://www.ebina-bunka.jp/event/44675/" class="schedule__ticket">Tickets →</a>
+      </article>
+      </article>
+            <article class="schedule__item">
+        <div class="schedule__date">
+          <span class="schedule__month">May</span>
+          <span class="schedule__day">18</span>
+          <span class="schedule__year">2026</span>
+        </div>
+        <div class="schedule__info">
+          <span class="schedule__tag">ORCHESTRA</span>
+          <h3 class="schedule__title">◆ウィーンフィル首席チェロ奏者タマーシュ・ヴァルガ日本ツアー共演</h3>
+          <p class="schedule__venue">ルーテル市ヶ谷ホール, 東京</p>
+          <p class="schedule__detail">開場 18:30 / 開演 19:00</p>
+        </div>
+        <a href="https://www.ebina-bunka.jp/event/44675/" class="schedule__ticket">Tickets →</a>
+      </article>
+      <article class="schedule__item">
+        <div class="schedule__date">
+          <span class="schedule__month">Jul</span>
+          <span class="schedule__day">14</span>
+          <span class="schedule__year">2026</span>
+        </div>
+        <div class="schedule__info">
+          <span class="schedule__tag">ORCHESTRA</span>
+          <h3 class="schedule__title">◆名門パリ国立高等音楽院ゆかりの名手たちが奏でるパリのエスプリ！パリ祭に寄せて</h3>
+          <p class="schedule__venue">ザ・フェニックスホール, 大阪</p>
+          <p class="schedule__detail">開場 18:30 / 開演 19:00</p>
+        </div>
+        <a href="https://www.kojimacm.com/digest/260714/260714.html" class="schedule__ticket">Tickets →</a>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- Discography / CD -->
+  <section class="section cd" id="cd">
+    <div class="section__label">03 — Discography</div>
+    <h2 class="section__title">作品集</h2>
+    <div class="cd__grid">
+
+      <article class="cd__item cd__item--featured">
+        <div class="cd__cover">
+            <img 
+            src="CD2.jpg" 
+            alt="CD 写真" 
+            style="width: 100%; height: 100%; object-fit: cover; display: block;"
+        />
+          <!-- <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <rect width="300" height="300" fill="#111"/>
+            <circle cx="150" cy="150" r="120" fill="none" stroke="#333" stroke-width="1"/>
+            <circle cx="150" cy="150" r="80" fill="none" stroke="#2a2a2a" stroke-width="1"/>
+            <circle cx="150" cy="150" r="10" fill="#333"/>
+            <text x="150" y="135" text-anchor="middle" fill="#888" font-size="13" font-family="Cormorant Garamond, serif" letter-spacing="3">SILENCES</text>
+            <text x="150" y="160" text-anchor="middle" fill="#555" font-size="9" font-family="serif" letter-spacing="5">SAKI NISHIOKA</text>
+            <line x1="30" y1="250" x2="270" y2="250" stroke="#222" stroke-width="1"/>
+            <text x="150" y="270" text-anchor="middle" fill="#444" font-size="8" font-family="serif" letter-spacing="3">2024</text>
+          </svg> -->
+        </div>
+        <div class="cd__info">
+          <span class="cd__label">最新作</span>
+          <h3 class="cd__title">フォーレ</h3>
+          <p class="cd__subtitle">ピアノソロ作品全集 第２巻</p>
+          <p class="cd__desc">神秘と音の境界を探求した、深夜に聴くべき一枚。</p>
+          <div class="cd__tracklist">
+            <div class="cd__track"><span>01</span>ノクターン 全12曲</div>
+            <div class="cd__track"><span>02</span>8つの小品 op.84</div>
+            <div class="cd__track"><span>03</span>9つの前奏曲 op.103</div>
+            <div class="cd__track cd__track--more">+ 12 tracks</div>
+          </div>
+          <a href="https://sakinishioka.stores.jp/" class="btn btn--outline">購入する</a>
+        </div>
+      </article>
+
+      <!-- <article class="cd__item">
+        <div class="cd__cover cd__cover--sm">
+          <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="220" height="220" fill="#0d0d0d"/>
+            <rect x="20" y="20" width="180" height="180" fill="none" stroke="#2a2a2a" stroke-width="1"/>
+            <text x="110" y="100" text-anchor="middle" fill="#777" font-size="14" font-family="Cormorant Garamond, serif" letter-spacing="2">WINTERREISE</text>
+            <text x="110" y="125" text-anchor="middle" fill="#444" font-size="8" font-family="serif" letter-spacing="4">SHIRASAWA</text>
+            <text x="110" y="185" text-anchor="middle" fill="#333" font-size="8" letter-spacing="3">2022</text>
+          </svg>
+        </div>
+        <h3 class="cd__title--sm">Winterreise</h3>
+        <p class="cd__year">2022</p>
+      </article>
+
+      <article class="cd__item">
+        <div class="cd__cover cd__cover--sm">
+          <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="220" height="220" fill="#181818"/>
+            <circle cx="110" cy="110" r="90" fill="none" stroke="#2a2a2a" stroke-width="0.5"/>
+            <circle cx="110" cy="110" r="60" fill="none" stroke="#222" stroke-width="0.5"/>
+            <text x="110" y="105" text-anchor="middle" fill="#777" font-size="13" font-family="Cormorant Garamond, serif" letter-spacing="2">GOLDBERG</text>
+            <text x="110" y="125" text-anchor="middle" fill="#444" font-size="8" font-family="serif" letter-spacing="4">VARIATIONS</text>
+            <text x="110" y="180" text-anchor="middle" fill="#333" font-size="8" letter-spacing="3">2020</text>
+          </svg>
+        </div>
+        <h3 class="cd__title--sm">Goldberg Variations</h3>
+        <p class="cd__year">2020</p>
+      </article> -->
+
+      <article class="cd__item">
+        <div class="cd__cover cd__cover--sm">
+            <div class="cd__cover">
+            <img 
+            src="CD1.jpg" 
+            alt="CD1 写真" 
+            style="width: 100%; height: 100%; object-fit: cover; display: block;"
+        />
+          <!-- <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="220" height="220" fill="#151515"/>
+            <line x1="0" y1="110" x2="220" y2="110" stroke="#2a2a2a" stroke-width="0.5"/>
+            <line x1="110" y1="0" x2="110" y2="220" stroke="#2a2a2a" stroke-width="0.5"/>
+            <text x="110" y="100" text-anchor="middle" fill="#777" font-size="12" font-family="Cormorant Garamond, serif" letter-spacing="2">DEBUSSY</text>
+            <text x="110" y="125" text-anchor="middle" fill="#444" font-size="8" font-family="serif" letter-spacing="3">PRÉLUDES</text>
+            <text x="110" y="180" text-anchor="middle" fill="#333" font-size="8" letter-spacing="3">2018</text>
+          </svg> -->
+        </div>
+        <h3 class="cd__title--sm">Gabriel Urbain Fauré</h3>
+        <p class="cd__year">2025</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- News -->
+  <section class="section news" id="news">
+    <div class="section__label">04 — News</div>
+    <h2 class="section__title">最新情報</h2>
+    <div class="news__grid">
+
+      <article class="news__item news__item--large">
+        <div class="news__image">
+            <div class="cd__cover">
+            <img 
+            src="school1.jpg" 
+            alt="saki 写真" 
+            style="width: 100%; height: 100%; object-fit: cover; display: block;"
+        />
+          <!-- <svg viewBox="0 0 580 320" xmlns="http://www.w3.org/2000/svg">
+            <rect width="580" height="320" fill="#1a1a1a"/>
+            <rect x="0" y="0" width="580" height="320" fill="url(#ng1)" opacity="0.5"/>
+            <defs>
+              <linearGradient id="ng1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#111"/>
+                <stop offset="100%" style="stop-color:#333"/>
+              </linearGradient>
+            </defs>
+            <text x="290" y="150" text-anchor="middle" fill="#2a2a2a" font-size="80" font-family="Cormorant Garamond, serif">NEWS</text>
+            <text x="290" y="200" text-anchor="middle" fill="#555" font-size="12" font-family="serif" letter-spacing="4">MUSIKVEREIN WIEN 2025</text>
+          </svg> -->
+        </div>
+        <div class="news__body">
+          <span class="news__date">2026.04.14</span>
+          <span class="news__category">AWARD</span>
+          <h3 class="news__title">2026年度前期、京都市立芸術大学ピアノ専攻の非常勤講師を務めます。</h3>
+          <p class="news__excerpt">今年度の前期の間、京都市立芸術大学ピアノ専攻の非常勤講師を務めさせていただきます。
+            <br>大学での指導の第一歩を踏み出せたこと、そして教える立場として母校に帰ってくることができ、とても嬉しく思います。自身が学んできたことを学生たちに還元できるよう精一杯努めます！</p>
+          <a href="#" class="news__more">続きを読む →</a>
+        </div>
+      </article>
+
+      <article class="news__item">
+        <span class="news__date">2024.04.04</span>
+        <span class="news__category">CONCERT</span>
+        <h3 class="news__title">2026年5月、ウィーンフィル首席チェロ奏者であるタマーシュ・ヴァルガ氏の日本ツアーで共演いたします。</h3>
+        <a href="#" class="news__more">Read more →</a>
+      </article>
+
+      <article class="news__item">
+        <span class="news__date">2025.12.20</span>
+        <span class="news__category">AWARD</span>
+        <h3 class="news__title">『フォーレ:ピアノソロ作品全集』第２巻、本日発売！</h3>
+        <a href="#" class="news__more">Read more →</a>
+      </article>
+
+      <article class="news__item">
+        <span class="news__date">2025.07.16</span>
+        <span class="news__category">MEDIA</span>
+        <h3 class="news__title">デビューアルバム『フォーレ:ピアノソロ作品全集』第１巻、7月25日発売！</h3>
+        <a href="#" class="news__more">Read more →</a>
+      </article>
+
+      <!-- <article class="news__item">
+        <span class="news__date">2024.12.20</span>
+        <span class="news__category">LESSON</span>
+        <h3 class="news__title">2025年春季マスタークラスの参加者募集を開始します</h3>
+        <a href="#" class="news__more">Read more →</a>
+      </article> -->
+
+    </div>
+  </section>
+
+  <!-- Blog -->
+  <section class="section blog" id="blog">
+    <div class="section__label">05 — Blog</div>
+    <h2 class="section__title">音楽の断章</h2>
+    <div class="blog__grid">
+
+      <article class="blog__item">
+        <div class="blog__image">
+          <svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="380" height="220" fill="#161616"/>
+            <text x="190" y="95" text-anchor="middle" fill="#232323" font-size="60" font-family="Cormorant Garamond, serif" font-style="italic">I</text>
+            <text x="190" y="145" text-anchor="middle" fill="#444" font-size="10" font-family="serif" letter-spacing="5">INTERPRETATION</text>
+          </svg>
+        </div>
+        <div class="blog__body">
+          <span class="blog__date">2025.04.20</span>
+          <h3 class="blog__title">ショパンのノクターンを演奏するということ</h3>
+          <p class="blog__excerpt">楽譜に書かれた音符は、演奏者にとって出発点に過ぎない。ショパンが夜想曲に込めた「語られない感情」をどう解釈し、指先で表現するか...</p>
+          <a href="#" class="blog__link">Read →</a>
+        </div>
+      </article>
+
+      <article class="blog__item">
+        <div class="blog__image">
+          <svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="380" height="220" fill="#131313"/>
+            <text x="190" y="95" text-anchor="middle" fill="#202020" font-size="60" font-family="Cormorant Garamond, serif" font-style="italic">W</text>
+            <text x="190" y="145" text-anchor="middle" fill="#444" font-size="10" font-family="serif" letter-spacing="5">WIEN</text>
+          </svg>
+        </div>
+        <div class="blog__body">
+          <span class="blog__date">2025.03.15</span>
+          <h3 class="blog__title">ウィーンのカフェで気づいた、音楽の「間」</h3>
+          <p class="blog__excerpt">ウィーン留学中、カフェ・ザッハーで一人コーヒーを飲んでいた時のこと。隣のテーブルから聞こえてきた会話のリズムが...</p>
+          <a href="#" class="blog__link">Read →</a>
+        </div>
+      </article>
+
+      <article class="blog__item">
+        <div class="blog__image">
+          <svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="380" height="220" fill="#181818"/>
+            <text x="190" y="95" text-anchor="middle" fill="#252525" font-size="60" font-family="Cormorant Garamond, serif" font-style="italic">S</text>
+            <text x="190" y="145" text-anchor="middle" fill="#444" font-size="10" font-family="serif" letter-spacing="5">SCHUBERT</text>
+          </svg>
+        </div>
+        <div class="blog__body">
+          <span class="blog__date">2025.02.08</span>
+          <h3 class="blog__title">シューベルトの「さすらい」— 未完の美学</h3>
+          <p class="blog__excerpt">シューベルトほど「未完成」という概念が似合う作曲家はいない。それは彼の人生そのものの投影であり、音楽における...</p>
+          <a href="#" class="blog__link">Read →</a>
+        </div>
+      </article>
+
+    </div>
+    <div class="blog__more">
+      <a href="#" class="btn btn--ghost">過去の記事を見る</a>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section contact" id="contact">
+    <div class="section__label">06 — Contact</div>
+    <div class="contact__inner">
+      <div class="contact__text">
+        <h2 class="section__title">お問い合わせ</h2>
+        <p class="contact__desc">演奏依頼、メディア取材、レッスンご希望の方は<br>以下のフォームよりお気軽にご連絡ください。</p>
+        <div class="contact__info">
+          <!-- <div class="contact__info-item">
+            <span class="contact__info-label">Manager</span>
+            <span class="contact__info-value">株式会社アルテ・マネジメント</span>
+          </div> -->
+          <div class="contact__info-item">
+            <span class="contact__info-label">Email</span>
+            <span class="contact__info-value">sakinishioka.pf@gmail.com</span>
+          </div>
+        </div>
+      </div>
+      <form class="contact__form" id="contactForm">
+        <div class="form__group">
+          <label class="form__label" for="name">お名前 <span>*</span></label>
+          <input class="form__input" type="text" id="name" name="name" placeholder="山田 花子" required />
+        </div>
+        <div class="form__group">
+          <label class="form__label" for="email">メールアドレス <span>*</span></label>
+          <input class="form__input" type="email" id="email" name="email" placeholder="your@email.com" required />
+        </div>
+        <div class="form__group">
+          <label class="form__label" for="subject">件名</label>
+          <select class="form__select" id="subject" name="subject">
+            <option value="">お問い合わせの種類</option>
+            <option value="concert">演奏依頼</option>
+            <option value="media">メディア取材</option>
+            <option value="lesson">レッスン希望</option>
+            <option value="cd">CD / 音源について</option>
+            <option value="other">その他</option>
+          </select>
+        </div>
+        <div class="form__group">
+          <label class="form__label" for="message">メッセージ <span>*</span></label>
+          <textarea class="form__textarea" id="message" name="message" rows="5" placeholder="ご用件をお書きください..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary form__submit">送信する</button>
+        <p class="form__notice">* は必須項目です。2〜3営業日以内にご返信いたします。</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <p class="footer__name">SAKI NISHIOKA</p>
+        <p class="footer__sub">西岡 沙樹 — Pianist</p>
+      </div>
+      <nav class="footer__nav">
+        <a href="#profile">Profile</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#cd">Discography</a>
+        <a href="#news">News</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="footer__social">
+        <a href="https://www.youtube.com/@sakinishioka_pf" aria-label="YouTube">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1C4.5 20.4 12 20.4 12 20.4s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/saki_nissin" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.2 4.8 1.7 5 5 .1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.2 3.3-1.7 4.8-5 5-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.2-4.8-1.7-5-5C2.1 15.6 2 15.2 2 12c0-3.2 0-3.6.1-4.8.2-3.3 1.7-4.8 5-5 1.3-.1 1.6-.1 4.9-.1zm0-2.2C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1.0 8.3 0 8.7 0 12c0 3.3 0 3.7.1 4.9.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24c3.3 0 3.7 0 4.9-.1 4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9 0-3.3 0-3.7-.1-4.9-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg>
+        </a>
+        <a href="https://x.com/SakiNishioka" aria-label="X">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 2h3.1L13.9 9.63 22.5 22h-6.74l-5.33-6.97L4.5 22H1.38l8-9.15L1 2h6.9l4.81 6.29L18.24 2zm-1.08 17.95h1.72L6.93 3.76H5.08l12.08 16.19z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2025 SAKI NISHIOKA. All rights reserved.</p>
+      <p>Designed with precision and silence.</p>
+    </div>
+  </footer>
+
+  <script>// ===================================================
+// SAKI NISHIOKA — Pianist Site Scripts
+// ===================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ----- NAV SCROLL STATE -----
+  const nav = document.getElementById('nav');
+  const scrollHandler = () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  };
+  window.addEventListener('scroll', scrollHandler, { passive: true });
+
+  // ----- MOBILE MENU -----
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+  let menuOpen = false;
+
+  hamburger.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobileMenu.classList.toggle('open', menuOpen);
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+
+    const spans = hamburger.querySelectorAll('span');
+    if (menuOpen) {
+      spans[0].style.transform = 'rotate(45deg) translate(4px, 4px)';
+      spans[1].style.opacity = '0';
+      spans[2].style.transform = 'rotate(-45deg) translate(4px, -4px)';
+    } else {
+      spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+    }
+  });
+
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      menuOpen = false;
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+      hamburger.querySelectorAll('span').forEach(s => {
+        s.style.transform = ''; s.style.opacity = '';
+      });
+    });
+  });
+
+  // ----- CONTACT FORM -----
+  const form = document.getElementById('contactForm');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('.form__submit');
+      const original = btn.textContent;
+      btn.textContent = '送信中...';
+      btn.disabled = true;
+
+      // Simulate send
+      setTimeout(() => {
+        btn.textContent = '送信完了 ✓';
+        btn.style.borderColor = '#d4c4a0';
+        btn.style.color = '#d4c4a0';
+
+        setTimeout(() => {
+          form.reset();
+          btn.textContent = original;
+          btn.disabled = false;
+          btn.style.borderColor = '';
+          btn.style.color = '';
+        }, 3000);
+      }, 1200);
+    });
+  }
+
+  // ----- SCROLL REVEAL -----
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  // Add reveal class to section elements
+  const targets = document.querySelectorAll(
+    '.section__label, .section__title, .profile__body, .award, ' +
+    '.schedule__item, .cd__item, .news__item, .blog__item, ' +
+    '.contact__info-item, .form__group'
+  );
+
+  targets.forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = `opacity 0.7s cubic-bezier(0.22,1,0.36,1) ${(i % 5) * 0.08}s, transform 0.7s cubic-bezier(0.22,1,0.36,1) ${(i % 5) * 0.08}s`;
+    revealObserver.observe(el);
+  });
+
+  // Inject in-view style
+  const style = document.createElement('style');
+  style.textContent = '.in-view { opacity: 1 !important; transform: none !important; }';
+  document.head.appendChild(style);
+
+  // ----- ACTIVE NAV LINK -----
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav__links a:not(.nav__cta)');
+
+  const activeLinkObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => {
+          link.style.color = link.getAttribute('href') === `#${id}`
+            ? 'var(--white)' : '';
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  sections.forEach(s => activeLinkObserver.observe(s));
+
+  // ----- CURSOR TRAIL (desktop only) -----
+  if (window.matchMedia('(pointer: fine)').matches) {
+    const dot = document.createElement('div');
+    dot.style.cssText = `
+      position: fixed; width: 6px; height: 6px; background: rgba(212,196,160,0.6);
+      border-radius: 50%; pointer-events: none; z-index: 9999;
+      transition: transform 0.15s ease;
+      transform: translate(-50%, -50%);
+    `;
+    document.body.appendChild(dot);
+
+    const ring = document.createElement('div');
+    ring.style.cssText = `
+      position: fixed; width: 32px; height: 32px; border: 1px solid rgba(212,196,160,0.2);
+      border-radius: 50%; pointer-events: none; z-index: 9998;
+      transition: left 0.2s ease, top 0.2s ease, transform 0.2s ease;
+      transform: translate(-50%, -50%);
+    `;
+    document.body.appendChild(ring);
+
+    let mx = 0, my = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx + 'px';
+      dot.style.top = my + 'px';
+      ring.style.left = mx + 'px';
+      ring.style.top = my + 'px';
+    });
+
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        ring.style.transform = 'translate(-50%, -50%) scale(1.6)';
+        ring.style.borderColor = 'rgba(212,196,160,0.5)';
+      });
+      el.addEventListener('mouseleave', () => {
+        ring.style.transform = 'translate(-50%, -50%) scale(1)';
+        ring.style.borderColor = 'rgba(212,196,160,0.2)';
+      });
+    });
+  }
+
+  // ----- PIANO KEY HOVER ON HERO -----
+  const heroBg = document.querySelector('.hero__bg');
+  if (heroBg) {
+    // Subtle horizontal line drift
+    let tick = 0;
+    const animLines = () => {
+      tick += 0.003;
+      heroBg.querySelector('.hero__lines').style.backgroundPositionY = `${tick * 10}px`;
+      requestAnimationFrame(animLines);
+    };
+    animLines();
+  }
+
+});
+</script>
+</body>
+</html>
