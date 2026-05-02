@@ -383,7 +383,7 @@ img, svg { display: block; }
   height: auto;
 }
 
-.hero__image-wrap::before {
+/* .hero__image-wrap::before {
   content: '';
   position: absolute;
   top: 10%;
@@ -392,7 +392,7 @@ img, svg { display: block; }
   height: 80%;
   border: 1px solid var(--border);
   z-index: 1;
-}
+} */
 
 .hero__image-wrap::after {
   content: '';
@@ -1283,7 +1283,7 @@ img, svg { display: block; }
 
   <!-- Profile -->
   <section class="section profile" id="profile">
-    <div class="section__label">01 — Profile</div>
+    <div class="section__label"> — Profile</div>
     <div class="profile__inner">
       <div class="profile__text">
         <!-- <h2 class="section__title">音楽と、<br><em>生きる。</em></h2> -->
@@ -1344,7 +1344,7 @@ img, svg { display: block; }
 
   <!-- Schedule -->
   <section class="section schedule" id="schedule">
-    <div class="section__label">02 — Schedule</div>
+    <div class="section__label"> — Schedule</div>
     <h2 class="section__title">演奏スケジュール</h2>
     <div class="schedule__list">
 
@@ -1469,7 +1469,7 @@ img, svg { display: block; }
 
   <!-- Discography / CD -->
   <section class="section cd" id="cd">
-    <div class="section__label">03 — Discography</div>
+    <div class="section__label"> — Discography</div>
     <h2 class="section__title">作品集</h2>
     <div class="cd__grid">
 
@@ -1561,7 +1561,7 @@ img, svg { display: block; }
 
   <!-- News -->
   <section class="section news" id="news">
-    <div class="section__label">04 — News</div>
+    <div class="section__label"> — News</div>
     <h2 class="section__title">最新情報</h2>
     <div class="news__grid">
 
@@ -1629,54 +1629,71 @@ img, svg { display: block; }
 
   <!-- Blog -->
   <section class="section blog" id="blog">
-    <div class="section__label">05 — Blog</div>
+    <div class="section__label"> — Blog</div>
     <h2 class="section__title">音楽の断章</h2>
     <div class="blog__grid">
-
       <article class="blog__item">
         <div class="blog__image">
-          <svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg">
+            <div class="cd__cover">
+            <img 
+            src="CD2.jpg" 
+            alt="CD 写真" 
+            style="width: 100%; height: 100%; object-fit: cover; display: block;"
+        />
+          <!-- <svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg">
             <rect width="380" height="220" fill="#161616"/>
             <text x="190" y="95" text-anchor="middle" fill="#232323" font-size="60" font-family="Cormorant Garamond, serif" font-style="italic">I</text>
             <text x="190" y="145" text-anchor="middle" fill="#444" font-size="10" font-family="serif" letter-spacing="5">INTERPRETATION</text>
-          </svg>
+          </svg> -->
         </div>
         <div class="blog__body">
-          <span class="blog__date">2025.04.20</span>
-          <h3 class="blog__title">ショパンのノクターンを演奏するということ</h3>
-          <p class="blog__excerpt">楽譜に書かれた音符は、演奏者にとって出発点に過ぎない。ショパンが夜想曲に込めた「語られない感情」をどう解釈し、指先で表現するか...</p>
+          <span class="blog__date">2025.12.20</span>
+          <h3 class="blog__title">フォーレ全集完結編！CD第2巻発売！</h3>
+          <p class="blog__excerpt">フォーレ全集の完結編となる「フォーレ：ピアノソロ作品全集  第2巻」（2枚組）がライヴノーツより発売となりました✨✨✨✨✨...</p>
           <a href="#" class="blog__link">Read →</a>
         </div>
       </article>
 
       <article class="blog__item">
         <div class="blog__image">
-          <svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg">
+            <div class="cd__cover">
+            <img 
+            src="CD1.jpg" 
+            alt="CD 写真" 
+            style="width: 100%; height: 100%; object-fit: cover; display: block;"
+        />
+          <!-- <svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg">
             <rect width="380" height="220" fill="#131313"/>
             <text x="190" y="95" text-anchor="middle" fill="#202020" font-size="60" font-family="Cormorant Garamond, serif" font-style="italic">W</text>
             <text x="190" y="145" text-anchor="middle" fill="#444" font-size="10" font-family="serif" letter-spacing="5">WIEN</text>
-          </svg>
+          </svg> -->
         </div>
         <div class="blog__body">
-          <span class="blog__date">2025.03.15</span>
-          <h3 class="blog__title">ウィーンのカフェで気づいた、音楽の「間」</h3>
-          <p class="blog__excerpt">ウィーン留学中、カフェ・ザッハーで一人コーヒーを飲んでいた時のこと。隣のテーブルから聞こえてきた会話のリズムが...</p>
+          <span class="blog__date">2025.07.17</span>
+          <h3 class="blog__title">デビューアルバム発売！</h3>
+          <p class="blog__excerpt">📣💿【Album Release 】2025年7月25日、デビューアルバム「フォーレ：ピアノソロ作品全集 第1巻」(2枚組)がライヴノーツよりリリースされます！...</p>
           <a href="#" class="blog__link">Read →</a>
         </div>
       </article>
 
       <article class="blog__item">
         <div class="blog__image">
-          <svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg">
+            <div class="cd__cover">
+            <img 
+            src="shijyuso.jpg" 
+            alt="四重奏チラシ" 
+            style="width: 100%; height: 100%; object-fit: cover; display: block;"
+        />
+          <!-- <svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg">
             <rect width="380" height="220" fill="#181818"/>
             <text x="190" y="95" text-anchor="middle" fill="#252525" font-size="60" font-family="Cormorant Garamond, serif" font-style="italic">S</text>
             <text x="190" y="145" text-anchor="middle" fill="#444" font-size="10" font-family="serif" letter-spacing="5">SCHUBERT</text>
-          </svg>
+          </svg> -->
         </div>
         <div class="blog__body">
-          <span class="blog__date">2025.02.08</span>
-          <h3 class="blog__title">シューベルトの「さすらい」— 未完の美学</h3>
-          <p class="blog__excerpt">シューベルトほど「未完成」という概念が似合う作曲家はいない。それは彼の人生そのものの投影であり、音楽における...</p>
+          <span class="blog__date">2025.03.13</span>
+          <h3 class="blog__title">ピアノ四重奏プロジェクト始動！</h3>
+          <p class="blog__excerpt">コジマ・コンサートマネジメント主催 KCM Concert at The Phoenix Hall, Osaka シリーズに初登場します！“ザ・ピアノカルテット・セレクションズ” と題し、モーツァルト、シューマン、ブラームス、フォーレのピアノ四重奏曲を全曲演奏するプロジェクト！！！...</p>
           <a href="#" class="blog__link">Read →</a>
         </div>
       </article>
@@ -1689,7 +1706,7 @@ img, svg { display: block; }
 
   <!-- Contact -->
   <section class="section contact" id="contact">
-    <div class="section__label">06 — Contact</div>
+    <div class="section__label"> — Contact</div>
     <div class="contact__inner">
       <div class="contact__text">
         <h2 class="section__title">お問い合わせ</h2>
