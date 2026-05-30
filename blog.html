@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — 西岡沙樹 ピアニスト | Saki Nishioka</title>
+  <meta name="description" content="ピアニスト西岡沙樹のブログ。演奏・CD・日常のことを綴っています。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+:root {
+  --black:#0a0a0a; --deep:#111111; --dark:#1a1a1a; --mid:#2a2a2a;
+  --border:#333333; --muted:#555555; --silver:#888888; --light:#cccccc;
+  --white:#f5f5f0; --accent:#d4c4a0;
+  --font-display:'Playfair Display','Cormorant Garamond',Georgia,serif;
+  --font-serif:'Cormorant Garamond',Georgia,serif;
+  --font-sans:'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN',sans-serif;
+  --ease-out:cubic-bezier(0.22,1,0.36,1);
+  --section-pad:clamp(80px,12vw,160px);
+  --container:1200px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background-color:var(--black);color:var(--light);font-family:var(--font-sans);font-weight:300;line-height:1.8;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--accent);color:var(--black)}
+a{color:inherit;text-decoration:none}
+img,svg{display:block}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--black)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+ 
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(24px,5vw,80px);height:72px;transition:background 0.4s var(--ease-out),border-color 0.4s;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);border-color:var(--border)}
+.nav__logo a{font-family:var(--font-display);font-size:1.3rem;font-weight:400;letter-spacing:0.15em;color:var(--white);transition:color 0.3s}
+.nav__logo a:hover{color:var(--accent)}
+.nav__links{display:flex;gap:clamp(24px,3vw,48px);list-style:none}
+.nav__links a{font-family:var(--font-serif);font-size:0.85rem;letter-spacing:0.12em;color:var(--silver);transition:color 0.3s;position:relative}
+.nav__links a::after{content:'';position:absolute;bottom:-4px;left:0;right:100%;height:1px;background:var(--accent);transition:right 0.3s var(--ease-out)}
+.nav__links a:hover,.nav__links a.active{color:var(--white)}
+.nav__links a:hover::after,.nav__links a.active::after{right:0}
+.nav__cta{border:1px solid var(--border)!important;padding:6px 18px;color:var(--light)!important;transition:border-color 0.3s,background 0.3s!important}
+.nav__cta:hover{background:var(--white)!important;color:var(--black)!important;border-color:var(--white)!important}
+.nav__cta::after{display:none!important}
+.nav__hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.nav__hamburger span{display:block;width:24px;height:1px;background:var(--light);transition:transform 0.3s,opacity 0.3s}
+.mobile-menu{position:fixed;inset:0;z-index:99;background:var(--black);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.4s}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu ul{list-style:none;text-align:center}
+.mobile-menu ul li{padding:16px 0}
+.mobile-menu ul a{font-family:var(--font-display);font-size:clamp(2rem,8vw,4rem);font-weight:400;letter-spacing:0.05em;color:var(--silver);transition:color 0.3s}
+.mobile-menu ul a:hover{color:var(--white)}
+ 
+/* BUTTONS */
+.btn{display:inline-block;font-family:var(--font-serif);font-size:0.85rem;letter-spacing:0.15em;padding:14px 36px;border:1px solid;transition:all 0.35s var(--ease-out);cursor:pointer;position:relative;overflow:hidden}
+.btn::before{content:'';position:absolute;inset:0;transform:translateX(-101%);transition:transform 0.35s var(--ease-out)}
+.btn:hover::before{transform:translateX(0)}
+.btn--ghost{background:transparent;color:var(--silver);border-color:var(--border)}
+.btn--ghost::before{background:var(--mid)}
+.btn--ghost:hover{color:var(--light);border-color:var(--muted)}
+ 
+/* PAGE HERO */
+.page-hero{padding:160px clamp(24px,7vw,100px) 80px;background:var(--black);position:relative;overflow:hidden}
+.page-hero__noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");opacity:0.4;pointer-events:none}
+.page-hero__lines{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(255,255,255,0.012) 80px,rgba(255,255,255,0.012) 81px);pointer-events:none}
+.page-hero__inner{max-width:var(--container);margin:0 auto;position:relative;z-index:2}
+.page-hero__label{font-family:var(--font-serif);font-size:1rem;letter-spacing:0.3em;color:#ffe2c7;text-transform:uppercase;margin-bottom:28px;display:flex;align-items:center;gap:16px}
+.page-hero__label::after{content:'';flex:1;max-width:60px;height:1px;background:var(--border)}
+.page-hero__title{font-family:var(--font-display);font-size:clamp(3rem,7vw,6rem);font-weight:400;line-height:1.1;color:var(--white);letter-spacing:0.04em;margin-bottom:24px}
+.page-hero__title em{font-style:italic;color:var(--accent)}
+.page-hero__desc{font-family:var(--font-serif);font-size:1.05rem;font-style:italic;color:var(--silver);letter-spacing:0.05em}
+.page-hero__back{margin-top:48px;display:inline-flex;align-items:center;gap:10px;font-family:var(--font-serif);font-size:0.82rem;letter-spacing:0.2em;color:var(--muted);transition:color 0.3s;text-transform:uppercase}
+.page-hero__back:hover{color:var(--accent)}
+.page-hero__back svg{transition:transform 0.3s}
+.page-hero__back:hover svg{transform:translateX(-4px)}
+ 
+/* BLOG LIST */
+.blog-list{background:var(--deep);padding:80px clamp(24px,7vw,100px) var(--section-pad)}
+.blog-list__inner{max-width:var(--container);margin:0 auto}
+.blog-list__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border)}
+.blog-card{background:var(--deep);cursor:pointer;transition:background 0.3s;display:flex;flex-direction:column}
+.blog-card:hover{background:var(--dark)}
+.blog-card--featured{grid-column:1/3;display:grid;grid-template-columns:1fr 1fr}
+.blog-card__image{overflow:hidden;flex-shrink:0}
+.blog-card__image img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s var(--ease-out)}
+.blog-card:hover .blog-card__image img{transform:scale(1.03)}
+.blog-card--featured .blog-card__image{min-height:320px}
+.blog-card:not(.blog-card--featured) .blog-card__image{height:200px}
+.blog-card__body{padding:32px 32px 40px;display:flex;flex-direction:column;flex:1}
+.blog-card__meta{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.blog-card__date{font-family:var(--font-serif);font-size:0.75rem;letter-spacing:0.2em;color:var(--muted)}
+.blog-card__tag{font-size:0.62rem;letter-spacing:0.25em;background:var(--accent);color:var(--black);padding:2px 10px;text-transform:uppercase}
+.blog-card__title{font-family:var(--font-display);font-weight:400;color:var(--white);line-height:1.45;margin-bottom:14px}
+.blog-card--featured .blog-card__title{font-size:clamp(1.2rem,2vw,1.6rem)}
+.blog-card:not(.blog-card--featured) .blog-card__title{font-size:1rem}
+.blog-card__excerpt{font-size:0.85rem;color:var(--silver);line-height:1.85;margin-bottom:24px;flex:1;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.blog-card:not(.blog-card--featured) .blog-card__excerpt{-webkit-line-clamp:3}
+.blog-card__link{font-family:var(--font-serif);font-size:0.8rem;letter-spacing:0.18em;color:var(--accent);transition:opacity 0.3s;align-self:flex-start}
+.blog-card__link:hover{opacity:0.7}
+ 
+/* ---- VIEW SWITCHER ---- */
+/* JSが動く前はどちらも表示させないようにしたいが、
+   ページ表示直後に一瞬両方見えるのを防ぐため
+   #articleView はデフォルト非表示にする        */
+#article-view{display:none}
+ 
+/* ARTICLE HERO */
+.article-hero{width:100%;height:clamp(280px,45vw,500px);overflow:hidden;position:relative;margin-top:72px}
+.article-hero img{width:100%;height:100%;object-fit:cover;display:block}
+.article-hero__overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(10,10,10,0.9) 100%)}
+ 
+/* ARTICLE BODY */
+.article-inner{max-width:800px;margin:0 auto;padding:64px clamp(24px,7vw,80px) var(--section-pad)}
+.article-header{margin-bottom:60px;border-bottom:1px solid var(--border);padding-bottom:48px}
+.article-header__meta{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.article-header__date{font-family:var(--font-serif);font-size:0.78rem;letter-spacing:0.2em;color:var(--muted)}
+.article-header__tag{font-size:0.62rem;letter-spacing:0.25em;background:var(--accent);color:var(--black);padding:2px 10px;text-transform:uppercase}
+.article-header__title{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,3rem);font-weight:400;color:var(--white);line-height:1.25;letter-spacing:0.02em}
+.article-body{font-family:var(--font-sans);font-size:0.97rem;color:var(--light);line-height:2.0}
+.article-body p{margin-bottom:28px}
+.article-body h2{font-family:var(--font-display);font-size:1.4rem;font-weight:400;color:var(--white);margin:56px 0 24px;letter-spacing:0.04em}
+.article-body h3{font-family:var(--font-serif);font-size:1.1rem;color:var(--accent);margin:40px 0 16px;letter-spacing:0.08em}
+.article-body blockquote{border-left:2px solid var(--accent);padding:16px 28px;margin:40px 0;font-family:var(--font-serif);font-size:1.05rem;font-style:italic;color:var(--silver);background:var(--deep)}
+.article-footer{margin-top:80px;padding-top:48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
+.article-back{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-serif);font-size:0.82rem;letter-spacing:0.2em;color:var(--muted);transition:color 0.3s;text-transform:uppercase;cursor:pointer;background:none;border:none}
+.article-back:hover{color:var(--accent)}
+.article-back svg{transition:transform 0.3s}
+.article-back:hover svg{transform:translateX(-4px)}
+ 
+/* FOOTER */
+.footer{background:var(--deep);border-top:1px solid var(--border);padding:80px clamp(24px,7vw,100px) 48px}
+.footer__top{display:grid;grid-template-columns:1fr 2fr 1fr;gap:48px;align-items:start;padding-bottom:60px;border-bottom:1px solid var(--border);margin-bottom:32px}
+.footer__name{font-family:var(--font-display);font-size:1.4rem;font-weight:400;letter-spacing:0.1em;color:var(--white);margin-bottom:8px}
+.footer__sub{font-family:var(--font-serif);font-size:0.8rem;color:var(--muted);letter-spacing:0.15em}
+.footer__nav{display:flex;flex-wrap:wrap;gap:12px 32px;justify-content:center}
+.footer__nav a{font-family:var(--font-serif);font-size:0.82rem;letter-spacing:0.12em;color:var(--muted);transition:color 0.3s}
+.footer__nav a:hover{color:var(--white)}
+.footer__social{display:flex;gap:20px;justify-content:flex-end;align-items:center}
+.footer__social a{transition:color 0.3s}
+.footer__social a:hover{color:var(--white)}
+.footer__bottom{display:flex;justify-content:space-between;font-size:0.75rem;color:var(--muted);font-family:var(--font-serif);letter-spacing:0.08em}
+ 
+/* BACK TO TOP */
+.back-top{position:fixed;bottom:1.5rem;right:1.5rem;width:44px;height:44px;background:var(--mid);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.25s,transform 0.25s;z-index:50;cursor:pointer}
+.back-top.visible{opacity:1;pointer-events:auto}
+.back-top:hover{transform:translateY(-2px)}
+.back-top svg{width:18px;height:18px;stroke:var(--white);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+ 
+/* RESPONSIVE */
+@media(max-width:900px){
+  .blog-card--featured{grid-column:1/-1;grid-template-columns:1fr}
+  .blog-card--featured .blog-card__image{min-height:240px}
+  .blog-list__grid{grid-template-columns:1fr 1fr}
+  .footer__top{grid-template-columns:1fr;text-align:center}
+  .footer__nav{justify-content:center}
+  .footer__social{justify-content:center}
+  .footer__bottom{flex-direction:column;align-items:center;gap:8px}
+}
+@media(max-width:640px){
+  .nav__links{display:none}
+  .nav__hamburger{display:flex}
+  .blog-list__grid{grid-template-columns:1fr}
+  .blog-card--featured{grid-column:1}
+}
+  </style>
+</head>
+<body>
+ 
+<nav class="nav" id="nav">
+  <div class="nav__logo"><a href="index.html">SAKI NISHIOKA</a></div>
+  <ul class="nav__links">
+    <li><a href="index.html#profile">Profile</a></li>
+    <li><a href="index.html#schedule">Schedule</a></li>
+    <li><a href="index.html#cd">Discography</a></li>
+    <li><a href="index.html#news">News</a></li>
+    <li><a href="blog.html" class="active">Blog</a></li>
+    <li><a href="index.html#contact" class="nav__cta">Contact</a></li>
+  </ul>
+  <button class="nav__hamburger" id="hamburger" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+ 
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="index.html#profile" class="mobile-link">Profile</a></li>
+    <li><a href="index.html#schedule" class="mobile-link">Schedule</a></li>
+    <li><a href="index.html#cd" class="mobile-link">Discography</a></li>
+    <li><a href="index.html#news" class="mobile-link">News</a></li>
+    <li><a href="blog.html" class="mobile-link">Blog</a></li>
+    <li><a href="index.html#contact" class="mobile-link">Contact</a></li>
+  </ul>
+</div>
+ 
+<!-- 一覧ビュー -->
+<div id="list-view">
+  <section class="page-hero">
+    <div class="page-hero__noise"></div>
+    <div class="page-hero__lines"></div>
+    <div class="page-hero__inner">
+      <div class="page-hero__label"> — Blog</div>
+      <!-- <h1 class="page-hero__title">音楽の<em>断章</em></h1> -->
+      <h2 class="page-hero__desc">演奏・CD・日常のことを綴っています。</h2>
+      <a href="index.html#blog" class="page-hero__back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        ホームへ戻る
+      </a>
+    </div>
+  </section>
+  <section class="blog-list">
+    <div class="blog-list__inner">
+      <div class="blog-list__grid" id="blog-grid"></div>
+    </div>
+  </section>
+</div>
+ 
+<!-- 記事詳細ビュー -->
+<div id="article-view">
+  <div class="article-hero">
+    <img id="a-img" src="" alt="" />
+    <div class="article-hero__overlay"></div>
+  </div>
+  <div class="article-inner">
+    <header class="article-header">
+      <div class="article-header__meta">
+        <span class="article-header__date" id="a-date"></span>
+        <span class="article-header__tag" id="a-tag"></span>
+      </div>
+      <h1 class="article-header__title" id="a-title"></h1>
+    </header>
+    <div class="article-body" id="a-body"></div>
+    <footer class="article-footer">
+      <button class="article-back" id="btn-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        ブログ一覧へ戻る
+      </button>
+    </footer>
+  </div>
+</div>
+ 
+<footer class="footer">
+  <div class="footer__top">
+    <div class="footer__brand">
+      <p class="footer__name">SAKI NISHIOKA</p>
+      <p class="footer__sub">西岡 沙樹 — Pianist</p>
+    </div>
+    <nav class="footer__nav">
+      <a href="index.html#profile">Profile</a>
+      <a href="index.html#schedule">Schedule</a>
+      <a href="index.html#cd">Discography</a>
+      <a href="index.html#news">News</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="footer__social">
+      <a href="https://www.youtube.com/@sakinishioka_pf" aria-label="YouTube"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1C4.5 20.4 12 20.4 12 20.4s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>
+      <a href="https://www.instagram.com/saki_nissin" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.2 4.8 1.7 5 5 .1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.2 3.3-1.7 4.8-5 5-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.2-4.8-1.7-5-5C2.1 15.6 2 15.2 2 12c0-3.2 0-3.6.1-4.8.2-3.3 1.7-4.8 5-5 1.3-.1 1.6-.1 4.9-.1zm0-2.2C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1.0 8.3 0 8.7 0 12c0 3.3 0 3.7.1 4.9.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24c3.3 0 3.7 0 4.9-.1 4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9 0-3.3 0-3.7-.1-4.9-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg></a>
+      <a href="https://x.com/SakiNishioka" aria-label="X"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 2h3.1L13.9 9.63 22.5 22h-6.74l-5.33-6.97L4.5 22H1.38l8-9.15L1 2h6.9l4.81 6.29L18.24 2zm-1.08 17.95h1.72L6.93 3.76H5.08l12.08 16.19z"/></svg></a>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p>© 2026 SAKI NISHIOKA. All rights reserved.</p>
+    <p>Designed with precision and silence.</p>
+  </div>
+</footer>
+ 
+<button class="back-top" id="backTop" aria-label="ページのトップへ戻る">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+ 
+<script>
+// =====================================================
+// 記事データ
+// ★ 新記事は配列の先頭に追加するだけ
+// =====================================================
+var POSTS = [
+  {
+    id: "faure-vol2",
+    date: "2025.12.20",
+    tag: "CD",
+    title: "フォーレ全集完結編！CD第2巻発売！",
+    image: "CD2.jpg",
+    imageAlt: "フォーレ ピアノソロ作品全集 第2巻",
+    excerpt: "フォーレ全集の完結編となる「フォーレ：ピアノソロ作品全集 第2巻」（2枚組）がライヴノーツより発売となりました✨✨✨✨✨...",
+    body: "<p>フォーレ全集の完結編となる「フォーレ：ピアノソロ作品全集 第2巻」（2枚組）がライヴノーツより発売となりました✨</p><p>今から約2年前に始まったレコーディング。ようやく全て世に放たれました！第2巻は前作の光と対照的な「影」がテーマ。ノクターンをはじめ、編曲作品としてパヴァーヌや即興曲第6番も収録されております。</p><h2>録音について</h2><p>今回の収録作品のレコーディング中、大雪に見舞われたことも。夢中で録ってる間に窓の外が雪に覆われ、これは宿泊先に帰れなくなる！とやむを得ず中断し、大急ぎで退散するというハプニングなんかもありました...今となっては良き思い出😂</p><p>光があってこその影。また逆も然り、影があっての光。共存する2つの相反する要素をフォーレの音楽の中に見出していただければ幸いです。</p><p>下記よりお買い求めいただけます。<br>HMV　Amazon　楽天　Tower Records</p><p>また下記公式オンラインストアでは、サイン入りCDもご購入いただけます。こちらはご注文完了から1〜2日で発送となります。<br> <a href=https://sakinishioka.stores.jp/>Saki Nishioka Online Store</a></p>"
+  },
+  {
+    id: "debut-album",
+    date: "2025.07.17",
+    tag: "CD",
+    title: "デビューアルバム発売！",
+    image: "CD1.jpg",
+    imageAlt: "フォーレ ピアノソロ作品全集 第1巻",
+    excerpt: "📣💿【Album Release】2025年7月25日、デビューアルバム「フォーレ：ピアノソロ作品全集 第1巻」(2枚組)がライヴノーツよりリリースされます！...",
+    body: "<p>📣💿【Album Release】</p><p>2025年7月25日、デビューアルバム「フォーレ：ピアノソロ作品全集 第1巻」(2枚組)がライヴノーツよりリリースされます！</p><p>第1巻には夜想曲（ノクターン）第1番から第6番、即興曲全5曲、バルカロール全13曲など、フォーレのピアノ独奏曲の精華を収録。ロマンティックな叙情から印象主義的な音色まで、フォーレの多彩な表情をご堪能ください。</p><h2>このアルバムに込めた想い</h2><p>2023年から2024年にかけて行った録音では、フォーレのピアノ作品全曲——CD4枚分——をわずか10日間で収録しました。これは私にとって、演奏家としての集大成とも言える挑戦でした。</p><blockquote>フォーレの音楽には、言葉にならない何かが流れている。それを音にするために、パリで過ごした日々のすべてが、今この瞬間に向かっていたのかもしれない。</blockquote><p>長年温めてきたフォーレ全集という夢が、ついに形になりました。どうぞよろしくお願いいたします🎹</p>"
+  },
+  {
+    id: "piano-quartet",
+    date: "2025.03.13",
+    tag: "CONCERT",
+    title: "ピアノ四重奏プロジェクト始動！",
+    image: "shijyuso.jpg",
+    imageAlt: "ピアノ四重奏チラシ",
+    excerpt: "コジマ・コンサートマネジメント主催 KCM Concert at The Phoenix Hall, Osaka シリーズに初登場します！「ザ・ピアノカルテット・セレクションズ」と題し、モーツァルト、シューマン、ブラームス、フォーレのピアノ四重奏曲を全曲演奏するプロジェクト！",
+    body: "<p>コジマ・コンサートマネジメント主催 KCM Concert at The Phoenix Hall, Osaka シリーズに初登場します！</p><p>「ザ・ピアノカルテット・セレクションズ」と題し、モーツァルト、シューマン、ブラームス、フォーレのピアノ四重奏曲を全曲演奏するプロジェクトが始動しました。</p><h2>プロジェクトの概要</h2><p>ピアノ四重奏という室内楽の中でも特に豊かな編成で、19世紀から20世紀初頭を代表する4つの傑作を一挙にお届けします。弦楽三重奏とピアノが織りなす親密で濃密な対話——ぜひ間近でお聴きください。</p><h3>プログラム</h3><p>モーツァルト：ピアノ四重奏曲 第1番 ト短調 K.478<br>シューマン：ピアノ四重奏曲 変ホ長調 op.47<br>ブラームス：ピアノ四重奏曲 第1番 ト短調 op.25<br>フォーレ：ピアノ四重奏曲 第1番 ハ短調 op.15</p><p>フォーレのピアノ四重奏曲は、私が長年大切にしてきた作品のひとつ。ソロ活動と並行して、こうした室内楽の喜びも皆さんとわかちあえることをとても楽しみにしています。</p><p>詳細は近日公開予定です。どうぞお楽しみに！</p>"
+  }
+  /*
+   ★ 新しい記事を追加するときはここの上にカンマで区切って追加
+  ,{
+    id: "unique-id",
+    date: "2026.01.01",
+    tag: "ESSAY",
+    title: "記事タイトル",
+    image: "画像ファイル名.jpg",
+    imageAlt: "画像の説明",
+    excerpt: "一覧に表示する概要文（100字程度）",
+    body: "<p>本文</p><h2>見出し</h2><p>続き</p>"
+  }
+  */
+];
+ 
+// =====================================================
+// ビュー切り替え
+// =====================================================
+var listEl    = document.getElementById("list-view");
+var articleEl = document.getElementById("article-view");
+ 
+function showList() {
+  articleEl.style.display = "none";
+  listEl.style.display    = "block";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+ 
+function showArticle(post) {
+  document.getElementById("a-img").src      = post.image;
+  document.getElementById("a-img").alt      = post.imageAlt;
+  document.getElementById("a-date").textContent = post.date;
+  document.getElementById("a-tag").textContent  = post.tag;
+  document.getElementById("a-title").textContent = post.title;
+  document.getElementById("a-body").innerHTML   = post.body;
+  listEl.style.display    = "none";
+  articleEl.style.display = "block";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+ 
+function openById(id) {
+  for (var i = 0; i < POSTS.length; i++) {
+    if (POSTS[i].id === id) { showArticle(POSTS[i]); return; }
+  }
+}
+ 
+// 戻るボタン
+document.getElementById("btn-back").addEventListener("click", function() {
+  try { history.pushState({}, "", location.pathname); } catch(e) {}
+  showList();
+});
+ 
+// ブラウザ前後ボタン
+window.addEventListener("popstate", function(e) {
+  var hash = location.hash.slice(1);
+  if (hash) { openById(hash); } else { showList(); }
+});
+ 
+// =====================================================
+// 一覧カード生成
+// =====================================================
+function buildGrid() {
+  var grid = document.getElementById("blog-grid");
+  grid.innerHTML = "";
+  for (var i = 0; i < POSTS.length; i++) {
+    (function(post, idx) {
+      var featured = (idx === 0);
+      var card = document.createElement("article");
+      card.className = "blog-card" + (featured ? " blog-card--featured" : "");
+      card.setAttribute("tabindex", "0");
+      card.innerHTML =
+        '<div class="blog-card__image"><img src="' + post.image + '" alt="' + post.imageAlt + '" loading="lazy"></div>' +
+        '<div class="blog-card__body">' +
+          '<div class="blog-card__meta">' +
+            '<span class="blog-card__date">' + post.date + '</span>' +
+            '<span class="blog-card__tag">' + post.tag + '</span>' +
+          '</div>' +
+          '<h2 class="blog-card__title">' + post.title + '</h2>' +
+          '<p class="blog-card__excerpt">' + post.excerpt + '</p>' +
+          '<span class="blog-card__link">Read &#8594;</span>' +
+        '</div>';
+      card.addEventListener("click", function() {
+        try { history.pushState({ id: post.id }, "", "#" + post.id); } catch(e) {}
+        showArticle(post);
+      });
+      card.addEventListener("keydown", function(e) {
+        if (e.key === "Enter" || e.key === " ") {
+          try { history.pushState({ id: post.id }, "", "#" + post.id); } catch(e2) {}
+          showArticle(post);
+        }
+      });
+      grid.appendChild(card);
+    })(POSTS[i], i);
+  }
+}
+ 
+// =====================================================
+// 初期化
+// =====================================================
+document.addEventListener("DOMContentLoaded", function() {
+  buildGrid();
+ 
+  // ハッシュから直接記事を開く（index.htmlのRead→リンク対応）
+  var hash = location.hash.slice(1);
+  if (hash) { openById(hash); }
+ 
+  // NAV
+  var nav = document.getElementById("nav");
+  window.addEventListener("scroll", function() {
+    nav.classList.toggle("scrolled", window.scrollY > 60);
+  }, { passive: true });
+ 
+  // HAMBURGER
+  var hamburger  = document.getElementById("hamburger");
+  var mobileMenu = document.getElementById("mobileMenu");
+  var menuOpen   = false;
+  hamburger.addEventListener("click", function() {
+    menuOpen = !menuOpen;
+    mobileMenu.classList.toggle("open", menuOpen);
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    var spans = hamburger.querySelectorAll("span");
+    if (menuOpen) {
+      spans[0].style.transform = "rotate(45deg) translate(4px, 4px)";
+      spans[1].style.opacity   = "0";
+      spans[2].style.transform = "rotate(-45deg) translate(4px, -4px)";
+    } else {
+      spans.forEach(function(s) { s.style.transform = ""; s.style.opacity = ""; });
+    }
+  });
+  document.querySelectorAll(".mobile-link").forEach(function(link) {
+    link.addEventListener("click", function() {
+      menuOpen = false;
+      mobileMenu.classList.remove("open");
+      document.body.style.overflow = "";
+      hamburger.querySelectorAll("span").forEach(function(s) { s.style.transform = ""; s.style.opacity = ""; });
+    });
+  });
+ 
+  // BACK TO TOP
+  var backTop = document.getElementById("backTop");
+  window.addEventListener("scroll", function() {
+    backTop.classList.toggle("visible", window.scrollY > 400);
+  }, { passive: true });
+  backTop.addEventListener("click", function() { window.scrollTo({ top: 0, behavior: "smooth" }); });
+ 
+  // SCROLL REVEAL (hero only)
+  if ("IntersectionObserver" in window) {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add("rv"); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    var rvStyle = document.createElement("style");
+    rvStyle.textContent = ".rv{opacity:1!important;transform:none!important}";
+    document.head.appendChild(rvStyle);
+    document.querySelectorAll(".page-hero__label,.page-hero__title,.page-hero__desc").forEach(function(el, i) {
+      el.style.opacity   = "0";
+      el.style.transform = "translateY(20px)";
+      el.style.transition = "opacity 0.7s " + (i * 0.12) + "s,transform 0.7s " + (i * 0.12) + "s";
+      obs.observe(el);
+    });
+  }
+ 
+  // CURSOR TRAIL
+  if (window.matchMedia("(pointer:fine)").matches) {
+    var dot  = document.createElement("div");
+    var ring = document.createElement("div");
+    dot.style.cssText  = "position:fixed;width:6px;height:6px;background:rgba(212,196,160,.6);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .15s";
+    ring.style.cssText = "position:fixed;width:32px;height:32px;border:1px solid rgba(212,196,160,.2);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .2s,top .2s,transform .2s";
+    document.body.appendChild(dot);
+    document.body.appendChild(ring);
+    document.addEventListener("mousemove", function(e) {
+      dot.style.left  = ring.style.left = e.clientX + "px";
+      dot.style.top   = ring.style.top  = e.clientY + "px";
+    });
+    document.querySelectorAll("a,button,.blog-card").forEach(function(el) {
+      el.addEventListener("mouseenter", function() { ring.style.transform = "translate(-50%,-50%) scale(1.6)"; ring.style.borderColor = "rgba(212,196,160,.5)"; });
+      el.addEventListener("mouseleave", function() { ring.style.transform = "translate(-50%,-50%) scale(1)";   ring.style.borderColor = "rgba(212,196,160,.2)"; });
+    });
+  }
+});
+</script>
+</body>
+</html>
+ 
+
