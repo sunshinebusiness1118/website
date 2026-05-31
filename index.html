@@ -1184,6 +1184,54 @@ img, svg { display: block; }
   align-self: flex-start;
   background: #d4c4a0;
   font-size: 1.0rem;
+  min-width: 160px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s var(--ease-out), background 0.4s, color 0.4s, border-color 0.4s;
+}
+
+/* 送信中 スピナー */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.form__submit.is-sending {
+  background: var(--mid);
+  border-color: var(--border);
+  color: var(--silver);
+  pointer-events: none;
+  cursor: default;
+}
+
+.form__submit.is-sending::after {
+  content: '';
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border: 1.5px solid var(--silver);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-left: 10px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+/* 送信完了 */
+@keyframes successPulse {
+  0%   { transform: scale(0.9); opacity: 0; }
+  50%  { transform: scale(1.04); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.form__submit.is-done {
+  background: transparent;
+  border-color: var(--accent);
+  color: var(--accent);
+  pointer-events: none;
+  cursor: default;
+  animation: successPulse 0.45s var(--ease-out) forwards;
 }
 
 .form__notice {
@@ -1802,8 +1850,10 @@ img, svg { display: block; }
         <!-- FormSubmit 設定 -->
         <input type="hidden" name="_subject" value="【お問い合わせ】西岡沙樹 公式サイト">
         <input type="hidden" name="_next" value="https://www.sakinishioka.com/#contact">
+        <input type="hidden" name="_cc" value="sunshinebusiness1118@gmail.com">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_autoresponse" value="この度はお問い合わせいただきありがとうございます。西岡沙樹です。&#10;&#10;お送りいただいた内容を確認の上、2〜3営業日以内にご返信いたします。&#10;&#10;しばらくお待ちいただけますと幸いです。&#10;&#10;――――――――――――――――&#10;西岡 沙樹（Saki Nishioka）&#10;ピアニスト&#10;sakinishioka.pf@gmail.com&#10;https://www.sakinishioka.com&#10;――――――――――――――――&#10;&#10;※ このメールは自動送信です。返信はできませんのでご了承ください。">
       </form>
     </div>
   </section>
@@ -1900,10 +1950,34 @@ backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smo
 const form = document.getElementById('contactForm');
 if (form) {
   form.addEventListener('submit', (e) => {
+    e.preventDefault(); // いったん止めてアニメーション後に送信
+
     const btn = form.querySelector('.form__submit');
-    btn.textContent = '送信中...';
-    btn.disabled = true;
-    // e.preventDefault() を削除 → 実際にFormSubmitへ送信される
+
+    // ── 送信中 ──
+    btn.textContent = '送信中…';
+    btn.classList.add('is-sending');
+
+    // FormSubmit に fetch で実際に送信
+    const data = new FormData(form);
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(() => {
+      // ── 送信完了 ──
+      btn.classList.remove('is-sending');
+      btn.textContent = '送信完了 ✓';
+      btn.classList.add('is-done');
+    })
+    .catch(() => {
+      // エラー時はフォールバック通常送信
+      btn.classList.remove('is-sending');
+      btn.textContent = '送信完了 ✓';
+      btn.classList.add('is-done');
+      form.submit();
+    });
   });
 }
 
