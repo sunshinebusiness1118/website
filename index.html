@@ -1820,7 +1820,7 @@ img, svg { display: block; }
         </div>
       </div>
       <form class="contact__form" id="contactForm"
-            action="https://formsubmit.co/sakinishioka.pf@gmail.com"
+            action="https://api.web3forms.com/submit"
             method="POST">
         <div class="form__group">
           <label class="form__label" for="name">お名前 <span>*</span></label>
@@ -1847,12 +1847,10 @@ img, svg { display: block; }
         </div>
         <button type="submit" class="btn btn--primary form__submit">送信する</button>
         <p class="form__notice">* は必須項目です。2〜3営業日以内にご返信いたします。</p>
-        <!-- FormSubmit 設定 -->
-        <input type="hidden" name="_subject" value="【お問い合わせ】西岡沙樹 公式サイト">
-        <input type="hidden" name="_next" value="https://www.sakinishioka.com/#contact">
-        <input type="hidden" name="_cc" value="sunshinebusiness1118@gmail.com">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_template" value="table">
+        <!-- Web3Forms 設定 -->
+        <input type="hidden" name="access_key" value="680cdde3-d65d-4019-ba2e-6c86d5f76626">
+        <input type="hidden" name="subject" value="【お問い合わせ】西岡沙樹 公式サイト">
+        <input type="hidden" name="redirect" value="https://www.sakinishioka.com/#contact">
       </form>
     </div>
   </section>
