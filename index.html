@@ -1771,7 +1771,9 @@ img, svg { display: block; }
           </div>
         </div>
       </div>
-      <form class="contact__form" id="contactForm">
+      <form class="contact__form" id="contactForm"
+            action="https://formsubmit.co/sakinishioka.pf@gmail.com"
+            method="POST">
         <div class="form__group">
           <label class="form__label" for="name">お名前 <span>*</span></label>
           <input class="form__input" type="text" id="name" name="name" placeholder="山田 花子" required />
@@ -1797,6 +1799,11 @@ img, svg { display: block; }
         </div>
         <button type="submit" class="btn btn--primary form__submit">送信する</button>
         <p class="form__notice">* は必須項目です。2〜3営業日以内にご返信いたします。</p>
+        <!-- FormSubmit 設定 -->
+        <input type="hidden" name="_subject" value="【お問い合わせ】西岡沙樹 公式サイト">
+        <input type="hidden" name="_next" value="https://www.sakinishioka.com/#contact">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
       </form>
     </div>
   </section>
@@ -1889,32 +1896,16 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  // ----- CONTACT FORM -----
-  const form = document.getElementById('contactForm');
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const btn = form.querySelector('.form__submit');
-      const original = btn.textContent;
-      btn.textContent = '送信中...';
-      btn.disabled = true;
-
-      // Simulate send
-      setTimeout(() => {
-        btn.textContent = '送信完了 ✓';
-        btn.style.borderColor = '#d4c4a0';
-        btn.style.color = '#d4c4a0';
-
-        setTimeout(() => {
-          form.reset();
-          btn.textContent = original;
-          btn.disabled = false;
-          btn.style.borderColor = '';
-          btn.style.color = '';
-        }, 3000);
-      }, 1200);
-    });
-  }
+// ----- CONTACT FORM -----
+const form = document.getElementById('contactForm');
+if (form) {
+  form.addEventListener('submit', (e) => {
+    const btn = form.querySelector('.form__submit');
+    btn.textContent = '送信中...';
+    btn.disabled = true;
+    // e.preventDefault() を削除 → 実際にFormSubmitへ送信される
+  });
+}
 
   // ----- SCROLL REVEAL -----
   const revealObserver = new IntersectionObserver((entries) => {
