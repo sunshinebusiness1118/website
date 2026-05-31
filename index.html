@@ -1945,7 +1945,6 @@ window.addEventListener('scroll', () => {
   backTop.classList.toggle('visible', window.scrollY > 400);
 }, { passive: true });
 backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
 // ----- CONTACT FORM -----
 const form = document.getElementById('contactForm');
 if (form) {
@@ -1953,6 +1952,7 @@ if (form) {
     // e.preventDefault(); // いったん止めてアニメーション後に送信
 
     const btn = form.querySelector('.form__submit');
+    btn.disabled = true;
 
     // ── 送信中 ──
     btn.textContent = '送信中…';
