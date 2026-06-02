@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saki Nishioka — Pianist | Profile (English)</title>
+  <meta name="description" content="Official English profile of pianist Saki Nishioka. Graduate of the Paris Conservatoire (CNSMDP), 2nd Prize at the Fauré International Piano Competition." />
+  <meta name="author" content="Saki Nishioka" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap" rel="stylesheet" />
+
+  <style>
+/* ===================================================
+   SAKI NISHIOKA — Pianist
+   Monochrome Luxury Design System
+   =================================================== */
+
+:root {
+  --black:   #0a0a0a;
+  --deep:    #111111;
+  --dark:    #1a1a1a;
+  --mid:     #2a2a2a;
+  --border:  #333333;
+  --muted:   #555555;
+  --silver:  #888888;
+  --light:   #cccccc;
+  --white:   #f5f5f0;
+  --accent:  #d4c4a0;
+
+  --font-display: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', sans-serif;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --section-pad: clamp(80px, 12vw, 160px);
+  --container: 1200px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--black);
+  color: var(--light);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.8;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--accent); color: var(--black); }
+
+a { color: inherit; text-decoration: none; }
+
+img, svg { display: block; }
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* ===================================================
+   NAVIGATION
+   =================================================== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(24px, 5vw, 80px);
+  height: 72px;
+  transition: background 0.4s var(--ease-out), border-color 0.4s;
+  border-bottom: 1px solid transparent;
+}
+
+.nav.scrolled {
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(12px);
+  border-color: var(--border);
+}
+
+.nav__logo a {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  color: var(--white);
+  transition: color 0.3s;
+}
+.nav__logo a:hover { color: var(--accent); }
+
+.nav__links {
+  display: flex;
+  gap: clamp(24px, 3vw, 48px);
+  list-style: none;
+  align-items: center;
+}
+
+.nav__links a {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  color: var(--silver);
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav__links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0; right: 100%;
+  height: 1px;
+  background: var(--accent);
+  transition: right 0.3s var(--ease-out);
+}
+.nav__links a:hover { color: var(--white); }
+.nav__links a:hover::after { right: 0; }
+
+.nav__lang {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  transition: border-color 0.3s, background 0.3s, color 0.3s;
+}
+.nav__lang:hover {
+  background: var(--accent);
+  color: var(--black);
+  border-color: var(--accent);
+}
+.nav__lang::after { display: none !important; }
+
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.nav__hamburger span {
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--light);
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+.mobile-menu.open { opacity: 1; pointer-events: all; }
+.mobile-menu ul { list-style: none; text-align: center; }
+.mobile-menu ul li { padding: 16px 0; }
+.mobile-menu ul a {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 8vw, 4rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--silver);
+  transition: color 0.3s;
+}
+.mobile-menu ul a:hover { color: var(--white); }
+
+/* ===================================================
+   BUTTONS
+   =================================================== */
+.btn {
+  display: inline-block;
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  padding: 14px 36px;
+  border: 1px solid;
+  transition: all 0.35s var(--ease-out);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-101%);
+  transition: transform 0.35s var(--ease-out);
+}
+
+.btn:hover::before { transform: translateX(0); }
+
+.btn--primary {
+  background: var(--white);
+  color: var(--black);
+  border-color: var(--white);
+}
+.btn--primary::before { background: var(--accent); }
+.btn--primary:hover { color: var(--black); }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--silver);
+  border-color: var(--border);
+}
+.btn--ghost::before { background: var(--mid); }
+.btn--ghost:hover { color: var(--light); border-color: var(--muted); }
+
+.btn--outline {
+  background: transparent;
+  color: var(--light);
+  border-color: var(--border);
+}
+.btn--outline::before { background: var(--white); }
+.btn--outline:hover { color: var(--black); border-color: var(--white); }
+
+/* ===================================================
+   PAGE HERO (Profile header)
+   =================================================== */
+.page-hero {
+  min-height: 40vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 clamp(24px, 7vw, 100px) 60px;
+  position: relative;
+  overflow: hidden;
+  background: var(--black);
+}
+
+.page-hero__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.page-hero__noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.4;
+}
+
+.page-hero__lines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 80px,
+    rgba(255,255,255,0.012) 80px,
+    rgba(255,255,255,0.012) 81px
+  );
+}
+
+.page-hero__content {
+  position: relative;
+  z-index: 2;
+}
+
+.page-hero__back {
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 28px;
+  transition: color 0.3s;
+}
+.page-hero__back:hover { color: var(--accent); }
+.page-hero__back::before { content: '←'; }
+
+.page-hero__label {
+  font-family: var(--font-serif);
+  font-size: 1.0rem;
+  letter-spacing: 0.3em;
+  color: #ffe2c7;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.page-hero__label::after {
+  content: '';
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: var(--border);
+}
+
+.page-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--white);
+}
+.page-hero__title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+/* ===================================================
+   SECTION COMMONS
+   =================================================== */
+.section {
+  padding: var(--section-pad) clamp(24px, 7vw, 100px);
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.section__label {
+  font-family: var(--font-serif);
+  font-size: 1.0rem;
+  letter-spacing: 0.3em;
+  color: #ffe2c7;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.section__label::after {
+  content: '';
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: var(--border);
+}
+
+.section__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--white);
+  margin-bottom: 60px;
+}
+.section__title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+/* ===================================================
+   PROFILE
+   =================================================== */
+.profile { background: var(--deep); }
+
+.profile__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 8vw, 100px);
+  align-items: start;
+  max-width: var(--container);
+  margin: 0 auto;
+}
+
+.profile__body p {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--white);
+  margin-bottom: 20px;
+  line-height: 1.9;
+}
+
+.profile__awards {
+  margin: 48px 0;
+  border-top: 1px solid var(--border);
+  padding-top: 32px;
+}
+
+.award {
+  display: flex;
+  gap: 24px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: baseline;
+}
+
+.award__year {
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  min-width: 50px;
+}
+
+.award__text {
+  font-size: 0.9rem;
+  color: var(--silver);
+}
+
+.profile__image-wrap {
+  position: relative;
+}
+
+.profile__image {
+  width: 100%;
+}
+
+.profile__image svg {
+  width: 100%;
+  height: auto;
+}
+
+.profile__image-deco {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: 20px;
+  bottom: 20px;
+  border: 1px solid var(--border);
+  z-index: -1;
+}
+
+/* ===================================================
+   FOOTER
+   =================================================== */
+.footer {
+  background: var(--deep);
+  border-top: 1px solid var(--border);
+  padding: 60px clamp(24px, 7vw, 100px) 40px;
+}
+
+.footer__top {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 48px;
+  margin-bottom: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--border);
+}
+
+.footer__name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: 0.15em;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.footer__sub {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+.footer__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer__nav a {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: var(--silver);
+  transition: color 0.3s;
+}
+.footer__nav a:hover { color: var(--white); }
+
+.footer__social {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: var(--silver);
+}
+.footer__social a { transition: color 0.3s; }
+.footer__social a:hover { color: var(--white); }
+
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-family: var(--font-serif);
+  letter-spacing: 0.08em;
+}
+
+/* =============================================
+   UTILITY: back-to-top
+   ============================================= */
+.back-top {
+  position: fixed; bottom: 1.5rem; right: 1.5rem;
+  width: 44px; height: 44px;
+  background: var(--mid);
+  color: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s, transform .25s;
+  z-index: 50;
+  cursor: pointer;
+}
+.back-top.visible { opacity: 1; pointer-events: auto; }
+.back-top:hover { transform: translateY(-2px); }
+.back-top svg { width: 18px; height: 18px; stroke: var(--white); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ===================================================
+   RESPONSIVE
+   =================================================== */
+@media (max-width: 900px) {
+  .profile__inner {
+    grid-template-columns: 1fr;
+  }
+  .profile__image-wrap { order: -1; }
+
+  .footer__top {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .footer__nav { align-items: center; }
+  .footer__social { flex-direction: row; justify-content: center; }
+  .footer__bottom {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav__links { display: none; }
+  .nav__hamburger { display: flex; }
+}
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav__logo">
+      <a href="index.html" aria-label="Saki Nishioka — Top Page">SAKI NISHIOKA</a>
+    </div>
+    <ul class="nav__links">
+      <li><a href="index.html#profile">Profile</a></li>
+      <li><a href="index.html#schedule">Schedule</a></li>
+      <li><a href="index.html#cd">Discography</a></li>
+      <li><a href="index.html#news">News</a></li>
+      <li><a href="index.html#blog">Blog</a></li>
+      <li><a href="index.html#contact" class="nav__cta" style="border:1px solid var(--border);padding:6px 18px;color:var(--light);transition:border-color .3s,background .3s;">Contact</a></li>
+      <li><a href="index.html#profile" class="nav__lang">日本語</a></li>
+    </ul>
+    <button class="nav__hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="index.html#profile" class="mobile-link">Profile</a></li>
+      <li><a href="index.html#schedule" class="mobile-link">Schedule</a></li>
+      <li><a href="index.html#cd" class="mobile-link">Discography</a></li>
+      <li><a href="index.html#news" class="mobile-link">News</a></li>
+      <li><a href="index.html#blog" class="mobile-link">Blog</a></li>
+      <li><a href="index.html#contact" class="mobile-link">Contact</a></li>
+      <li><a href="index.html#profile" class="mobile-link" style="color:var(--accent)">日本語</a></li>
+    </ul>
+  </div>
+
+  <!-- Page Hero -->
+  <section class="page-hero" style="padding-top: 72px;">
+    <div class="page-hero__bg">
+      <div class="page-hero__noise"></div>
+      <div class="page-hero__lines"></div>
+    </div>
+    <div class="page-hero__content">
+      <a href="index.html#profile" class="page-hero__back">Back to Japanese Profile</a>
+      <div class="page-hero__label"> — Profile</div>
+      <h1 class="page-hero__title">Saki Nishioka<br><em>Pianist</em></h1>
+    </div>
+  </section>
+
+  <!-- Profile (English) -->
+  <section class="section profile" id="profile">
+    <div class="profile__inner">
+      <div class="profile__text">
+        <div class="profile__body">
+          <p>
+            Born in Nara, Japan, Saki Nishioka studied at Shitennoji High School before graduating with a degree in Piano Performance from the Kyoto City University of Arts. She then moved to Paris to continue her studies at the Conservatoire National Supérieur de Musique et de Danse de Paris (CNSMDP), where she was admitted unanimously with the highest distinction, and graduated with the highest honours in 2018.
+          </p>
+          <p>
+            As a scholarship student of the Kyoto French Music Academy, she simultaneously studied at the École Normale de Musique de Paris, earning the Diplôme de Concertiste. She was also a scholarship recipient of the Aoyama Music Foundation in 2013 and 2014.
+          </p>
+          <p>
+            Her competition achievements include 2nd Prize at the 61st All-Japan Student Music Competition (National Finals), 1st Prize at the 19th Hüpfeld Tosu Piano Competition, the Encouragement Prize at the 18th Matsukata Hall Music Award, and 2nd Prize &amp; Audience Award at the 5th International Fauré Piano Competition (France), among numerous other prizes including finals and distinctions at the PTNA Piano Competition.
+          </p>
+          <p>
+            Nishioka performs solo recitals across Japan and Europe and has appeared as a concerto soloist with orchestras internationally, including the Ribeirão Preto Symphony Orchestra in Brazil. In France, she has been invited to prestigious festivals such as the Paris Chopin Festival, Lisztomanias, Piano en Valois, and Piano aux Jacobins.
+          </p>
+          <p>
+            She has studied under Claudio Soares, Hiroyuki Abe, Bruno Rigutto, Hortense Cartier-Bresson, and Fernando Rossano.
+          </p>
+          <p>
+            In 2022, she appeared on NHK-FM's <em>Récital Passio</em>. In 2023, she was selected for the prestigious Phoenix Evolution Series at the Aioi Nissay Dowa Insurance The Phoenix Hall (Osaka), where her recital devoted to Fauré's complete Nocturnes and Impromptus was met with high acclaim.
+          </p>
+          <p>
+            Between October 2023 and April 2024, she recorded the complete Fauré piano solo works — equivalent to four CDs, including transcriptions — in just ten days. The recordings were released in 2025 in two volumes.
+          </p>
+          <p>
+            In February 2026, invited by Musashino City Cultural Hall in Tokyo, she performed an ambitious seven-hour programme of <em>Fauré: The Complete Piano Works</em> to great critical acclaim. Also in 2026, she joined as a collaborative pianist on the Japan tour of Tamás Varga, Principal Cellist of the Vienna Philharmonic Orchestra.
+          </p>
+          <p>
+            She currently holds a position as Part-time Lecturer at Kyoto City University of Arts.
+          </p>
+        </div>
+
+        <!-- <div class="profile__awards">
+          <div class="award">
+            <span class="award__year">2007</span>
+            <span class="award__text">61st All-Japan Student Music Competition — National Finals, 2nd Prize</span>
+          </div>
+          <div class="award">
+            <span class="award__year">2013</span>
+            <span class="award__text">19th Hüpfeld Tosu Piano Competition — 1st Prize</span>
+          </div>
+          <div class="award">
+            <span class="award__year">2014</span>
+            <span class="award__text">18th Matsukata Hall Music Award — Encouragement Prize</span>
+          </div>
+          <div class="award">
+            <span class="award__year">2016</span>
+            <span class="award__text">5th International Fauré Piano Competition (France) — 2nd Prize &amp; Audience Award</span>
+          </div>
+          <div class="award">
+            <span class="award__year">2018</span>
+            <span class="award__text">7th Barcelona International Piano Academy Competition (Spain) — 1st Prize</span>
+          </div>
+        </div> -->
+
+        <a href="index.html#contact" class="btn btn--outline">Contact</a>
+      </div>
+
+      <div class="profile__image-wrap">
+        <div class="profile__image">
+          <img
+            src="photo_sakinishioka2.jpg"
+            alt="Saki Nishioka — Profile Photo"
+            style="width: 100%; height: 100%; object-fit: cover; display: block;"
+          />
+        </div>
+        <div class="profile__image-deco"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <p class="footer__name">SAKI NISHIOKA</p>
+        <p class="footer__sub">西岡 沙樹 — Pianist</p>
+      </div>
+      <nav class="footer__nav">
+        <a href="index.html#profile">Profile</a>
+        <a href="index.html#schedule">Schedule</a>
+        <a href="index.html#cd">Discography</a>
+        <a href="index.html#news">News</a>
+        <a href="index.html#blog">Blog</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <div class="footer__social">
+        <a href="https://www.youtube.com/@sakinishioka_pf" aria-label="YouTube">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1C4.5 20.4 12 20.4 12 20.4s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/saki_nissin" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.2 4.8 1.7 5 5 .1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.2 3.3-1.7 4.8-5 5-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.2-4.8-1.7-5-5C2.1 15.6 2 15.2 2 12c0-3.2 0-3.6.1-4.8.2-3.3 1.7-4.8 5-5 1.3-.1 1.6-.1 4.9-.1zm0-2.2C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1.0 8.3 0 8.7 0 12c0 3.3 0 3.7.1 4.9.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24c3.3 0 3.7 0 4.9-.1 4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9 0-3.3 0-3.7-.1-4.9-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4A6.2 6.2 0 0 0 12 5.8zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg>
+        </a>
+        <a href="https://x.com/SakiNishioka" aria-label="X">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 2h3.1L13.9 9.63 22.5 22h-6.74l-5.33-6.97L4.5 22H1.38l8-9.15L1 2h6.9l4.81 6.29L18.24 2zm-1.08 17.95h1.72L6.93 3.76H5.08l12.08 16.19z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2026 SAKI NISHIOKA. All rights reserved.</p>
+      <p>Designed with precision and silence.</p>
+    </div>
+  </footer>
+
+  <button class="back-top" id="backTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    let menuOpen = false;
+
+    hamburger.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      mobileMenu.classList.toggle('open', menuOpen);
+      document.body.style.overflow = menuOpen ? 'hidden' : '';
+      const spans = hamburger.querySelectorAll('span');
+      if (menuOpen) {
+        spans[0].style.transform = 'rotate(45deg) translate(4px, 4px)';
+        spans[1].style.opacity = '0';
+        spans[2].style.transform = 'rotate(-45deg) translate(4px, -4px)';
+      } else {
+        spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+      }
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        menuOpen = false;
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+        hamburger.querySelectorAll('span').forEach(s => {
+          s.style.transform = ''; s.style.opacity = '';
+        });
+      });
+    });
+
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+      backTop.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+    backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Scroll reveal
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+    const targets = document.querySelectorAll('.profile__body, .award, .page-hero__content');
+    targets.forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = `opacity 0.7s cubic-bezier(0.22,1,0.36,1) ${(i % 5) * 0.08}s, transform 0.7s cubic-bezier(0.22,1,0.36,1) ${(i % 5) * 0.08}s`;
+      revealObserver.observe(el);
+    });
+
+    const style = document.createElement('style');
+    style.textContent = '.in-view { opacity: 1 !important; transform: none !important; }';
+    document.head.appendChild(style);
+
+    // Cursor trail (desktop only)
+    if (window.matchMedia('(pointer: fine)').matches) {
+      const dot = document.createElement('div');
+      dot.style.cssText = `position:fixed;width:6px;height:6px;background:rgba(212,196,160,0.6);border-radius:50%;pointer-events:none;z-index:9999;transition:transform 0.15s ease;transform:translate(-50%,-50%);`;
+      document.body.appendChild(dot);
+      const ring = document.createElement('div');
+      ring.style.cssText = `position:fixed;width:32px;height:32px;border:1px solid rgba(212,196,160,0.2);border-radius:50%;pointer-events:none;z-index:9998;transition:left 0.2s ease,top 0.2s ease,transform 0.2s ease;transform:translate(-50%,-50%);`;
+      document.body.appendChild(ring);
+      document.addEventListener('mousemove', e => {
+        dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
+        ring.style.left = e.clientX + 'px'; ring.style.top = e.clientY + 'px';
+      });
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => { ring.style.transform = 'translate(-50%,-50%) scale(1.6)'; ring.style.borderColor = 'rgba(212,196,160,0.5)'; });
+        el.addEventListener('mouseleave', () => { ring.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.borderColor = 'rgba(212,196,160,0.2)'; });
+      });
+    }
+  });
+  </script>
+</body>
+</html>
